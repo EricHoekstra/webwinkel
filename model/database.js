@@ -1,10 +1,4 @@
-﻿/*
-
-    Database
-    --------
-    Regelt de verbinding met database. 
-
-*/
+﻿"use strict";
 
 module.exports = {
     connection: connectie,
