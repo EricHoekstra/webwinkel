@@ -1,11 +1,7 @@
-/*
-    
-    Configuratie
-    ------------
-    Gebruik absolute paden in dit bestand. De waarden kunnen in verschillende subfolders gebruikt worden.
-
+/**
+    @description De definitie van het configuratieobject. Het verzorgt de logging en geeft constanten die in heel de applicatie gebruikt kunnen worden. Gebruik absolute paden in dit bestand. De waarden kunnen in verschillende subfolders gebruikt worden.
+    @todo Misschien moet de logging naar een eigen module. Heeft niet de hoogste prio, maar wel netter.
 */
-
 "use strict";
 
 // Node-modules
