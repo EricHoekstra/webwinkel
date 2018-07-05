@@ -1,0 +1,71 @@
+<div class="col">
+    <h3>Bestelgeschiedenis</h3>
+    <div class="row">
+        <div class="col">
+            <p ng-show="model.bestellingen.length > 0">Dank voor uw aankopen tot dusver. U nam de volgende artikelen bij ons af.</p>
+            <p ng-show="model.login.ingelogd && model.bestellingen.$resolved &&!(model.bestellingen.length > 0)">Uw eerste bestelling moet nog komen.</p>
+            <p ng-show="!model.login.ingelogd"><a href="registratie">Logt u in</a> om uw bestelhistorie te zien.</p>
+            <div class="cursor-pointer"
+                 ng-repeat="bestelling in model.bestellingen"
+                 ng-click=" details = !details; kies(bestelling)">
+                <div class="d-flex justify-content-between border-bottom border-secondary">
+                    <p class="my-1">
+                        Bestelling {{bestelling.Bestelling_Nummer}} op {{bestelling.Bestelling_Tijdstip | toLocalDateString: model.account.Taal: true}}
+                    </p>
+                    <p class="my-1 text-info" ng-show="bestelling.Betaling_Openstaand < -0.10">
+                        u krijgt van ons {{bestelling.Betaling_Openstaand | currency}} terug
+                    </p>
+                    <p class="my-1" ng-show="bestelling.Betaling_Openstaand > 0.10">
+                        <a href="" class="text-info" ng-click="betaal(bestelling)">wij ontvangen graag nog {{bestelling.Betaling_Openstaand | currency}} van u</a>
+                    </p>
+                    <p class="my-1">{{bestelling.Bestelling_Aantal}} {{(bestelling.Bestelling_Aantal > 1 ? "artikelen" : "artikel")}} voor {{bestelling.Bestelling_Prijs | currency}}</p>
+                </div>
+                <div ng-show="details">
+                    <div class="mx-3 d-flex justify-content-between border-bottom border-primary text-primary"
+                         ng-repeat="bestelregel in bestelling.bestelregels track by bestelregel.Product_Nummer">
+                        <p class="my-1">
+                            {{bestelregel.Merk_Naam}} {{bestelregel.Product_Productnaam}}, {{bestelregel.Bestelregel_Aantal}} &times; {{bestelregel.Product_Prijs | currency}}
+                        </p>
+                        <p class="my-1">
+                            {{bestelregel.Bestelregel_Prijs | currency}}
+                        </p>
+                    </div>
+                    <div class="mx-3 d-flex justify-content-between border-bottom border-primary text-primary">
+                        <p class="my-1">Verzendkosten</p>
+                        <p class="my-1">{{bestelling.Verzendkosten_Kosten | currency}}</p>
+                    </div>
+                    <div class="mx-3 d-flex justify-content-between border-bottom border-primary text-primary">
+                        <p class="my-1">Totaal</p>
+                        <p class="my-1">{{bestelling.Bestelling_Prijs + 0 | currency}}</p>
+                    </div>
+                    <div class="mx-3 d-flex justify-content-between border-bottom border-primary text-primary">
+                        <p class="my-1 pl-3">
+                            Factuur #{{bestelling.factuur.Factuur_Nummer}}
+                        </p>
+                        <p class="my-1">
+                            {{bestelling.factuur.Factuur_Bedrag | currency}}
+                        </p>
+                    </div>
+                    <div class="mx-3 d-flex justify-content-between border-bottom border-primary text-primary"
+                         ng-repeat="betaling in bestelling.betalingen track by betaling.Betaling_Nummer">
+                        <p class="my-1 pl-3">
+                            Betaling #{{betaling.Betaling_Nummer}}
+                        </p>
+                        <p class="my-1">
+                            {{betaling.Betaling_Bedrag * -1 | currency}}
+                        </p>
+                    </div>
+                    <div class="mx-3 d-flex justify-content-between border-bottom border-primary text-primary"
+                         ng-repeat="verzending in bestelling.verzendingen track by verzending.Verzending_Nummer">
+                        <p class="my-1 pl-3">
+                            Verzending #{{verzending.Verzending_Nummer}} naar {{verzending.Adres_Straatnaam}} {{verzending.Adres_Huisnummer}} {{verzending.Adres_Toevoeging}} in {{verzending.Adres_Plaats}}
+                        </p>
+                        <p class="my-1">
+                            {{(verzending.Verzending_Afgeleverd ? "afgeleverd" : "gereed voor verzending")}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

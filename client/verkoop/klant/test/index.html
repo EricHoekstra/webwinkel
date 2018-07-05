@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html ng-app="testApp">
+<head>
+    <title>Supermarkt.nl | Klant | Test</title>
+
+    <!-- De klantApp vereist deze base-url. -->
+    <base href="https://www.erichoekstra.com/webwinkel/klant/index.html" />
+
+    <!-- Jasmine -->
+    <link rel="shortcut icon" type="image/png" href="/webwinkel/gedeeld/script/jasmine/3.1.0/jasmine_favicon.png">
+    <link rel="stylesheet" type="text/css" href="/webwinkel/gedeeld/script/jasmine/3.1.0/jasmine.css">
+    <script type="text/javascript" src="/webwinkel/gedeeld/script/jasmine/3.1.0/jasmine.js"></script>
+    <script type="text/javascript" src="/webwinkel/gedeeld/script/jasmine/3.1.0/jasmine-html.js"></script>
+    <script type="text/javascript" src="/webwinkel/gedeeld/script/jasmine/3.1.0/boot.js"></script>
+
+    <!-- AngularJS -->
+    <script src="/webwinkel/gedeeld/script/angularjs/1.7.2/angular.min.js"></script>
+    <script src="/webwinkel/gedeeld/script/angularjs/1.7.2/angular-route.js"></script>
+    <script src="/webwinkel/gedeeld/script/angularjs/1.7.2/angular-resource.js"></script>
+    <script src="/webwinkel/gedeeld/script/angularjs/1.7.2/angular-animate.min.js"></script>
+    <script src="/webwinkel/gedeeld/script/angularjs/1.7.2/angular-touch.min.js"></script>
+    <script src="/webwinkel/gedeeld/script/angularjs/1.7.2/angular-sanitize.min.js"></script>
+    <script src="/webwinkel/gedeeld/script/angularjs/angular-locale_nl-nl.js"></script>
+
+    <!-- AngularJS, ngMock -->
+    <script src="/webwinkel/gedeeld/script/angularjs/1.7.2/angular-mocks.js"></script>
+
+    <!-- De klantApp, het testobject, services -->
+    <script src="/webwinkel/gedeeld/script/modules/modules.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/configuratie.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/account.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/adres.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/klant.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/product.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/foto.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/bestel.js"></script>
+    <script src="/webwinkel/gedeeld/script/filters/toLocalDateString.js"></script>
+
+    <!-- ... en controllers  -->
+    <script src="modules/modules.js"></script>
+    <script src="model/model.js"></script>
+    <script src="controllers/standaard.js"></script>
+    <script src="controllers/product.js"></script>
+
+    <!-- testApp -->
+    <script>
+        angular.module("testApp", [])
+            .value("een", 1)
+    </script>
+</head>
+<body><script src="test/controllers/product.js"></script></body>
+</html>

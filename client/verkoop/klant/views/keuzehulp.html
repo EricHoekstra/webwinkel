@@ -1,0 +1,23 @@
+<div class="col">
+    <h3>Keuzehulp</h3>
+    <div class="row">
+        <div class="col-12 col-lg-6">
+            <p>Weet u niets te kiezen? Laat dan onze volautomatisch keuzehulp u helpen.</p>
+            <p><button type="button" class="btn btn-primary" ng-click="vulWinkelwagenDemo();">Vul winkelwagen aan</button></p>
+        </div>
+        <div class="col-12 col-lg-6">
+            <p>Het winkelwagentje bevat {{model.bestelregels.length || 0}} bestelregels met onderstaande artikelen.</p>
+            <img class="product-image product-image-small mr-2 cursor-pointer"
+                 title="{{bestelregel.Merk_Naam}} {{bestelregel.Product_Productnaam}}"
+                 ng-show="model.bestelregels.length > 0"
+                 ng-repeat="bestelregel in model.bestelregels track by bestelregel.Product_Nummer"
+                 ng-src="{{model.foto.url(bestelregel.Foto_Nummer)}}"
+                 ng-click="kiesProduct(bestelregel)" />
+            <img class="product-image product-image-small mr-2 cursor-pointer"
+                 style="filter: grayscale(100%) opacity(60%)"
+                 ng-show="model.bestelregels.length == 0"
+                 ng-repeat="n in [1,2,3]"
+                 ng-src="{{model.foto.urlWillekeurig(n)}}" />
+        </div>
+    </div>
+</div>

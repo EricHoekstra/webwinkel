@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-12 pt-3">
+        <div class="float-left col-2">
+            <table class="table-hover">
+                <tbody>
+                    <tr><td class="cursor-pointer text-danger" ng-click="filter.merk.wis()"><i class="fas fa-times"></i> Alle merken</td></tr>
+                    <tr ng-cloak ng-repeat="m in model.merken">
+                        <td class="cursor-pointer" ng-click="filter.merk.kies(m)">{{m.Merk_Naam}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="float-left col-10">
+            <h3>Ons aanbod</h3>
+            <p>
+                <input class="form-control form-control-sm" type="text" placeholder="quick organic oats"
+                       ng-model="query.zoek.vraag"
+                       ng-change="query.zoek.beantwoord()" />
+            </p>
+            <p>
+                <span ng-show="filter.merk.gekozen.length > 0 || query.zoek.vraag" ng-click="filter.merk.wis(); query.zoek.wis();" class="cursor-pointer text-danger">
+                    <i class="fas fa-times"></i>
+                </span>
+                <span ng-show="filter.merk.gekozen.length > 0">U ziet alleen het aanbod van: {{filter.merk.toon()}}.</span>
+                <span ng-show="query.zoek.vraag">U zoekt op: {{query.zoek.toon()}}.</span>
+                <span>&nbsp;</span>
+            </p>
+            <table class="table table-sm table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Merk</th>
+                        <th>#</th>
+                        <th>Productnaam</th>
+                        <th>Prijs</th>
+                        <th>#</th>
+                        <th>Foto_Afbeelding</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="p in model.producten | filter: filter.merk.filter | limitTo: filter.pagina.grootte: (filter.pagina.grootte * (filter.pagina.actueel - 1))" ng-click="product.kies(p)">
+                        <td>{{p.Merk_Nummer}}</td>
+                        <td>{{p.Merk_Naam}}</td>
+                        <td>{{p.Product_Nummer}}</td>
+                        <td>{{p.Product_Productnaam}}</td>
+                        <td>{{p.Product_Prijs | currency}}</td>
+                        <td>{{p.Foto_Nummer}}</td>
+                        <td><img decoding="async" style="height: 50px;" ng-src="{{model.fotoUrl(p.Foto_Nummer)}}" /></td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul class="pagination" ng-show="filter.pagina.lijst().length > 1">
+                <li class="page-item"><a class="page-link" href="#" ng-click="filter.pagina.vorige()">Vorige</a></li>
+                <li class="page-item"
+                    ng-repeat="n in filter.pagina.lijst() | limitTo: filter.pagina.grootte: filter.pagina.start()"
+                    ng-class="(n == filter.pagina.actueel ? 'active' : '')">
+                    <a class="page-link" href="#" ng-click="filter.pagina.kies(n)">{{n}}</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#" ng-click="filter.pagina.volgende()">Volgende</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

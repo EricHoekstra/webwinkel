@@ -1,0 +1,1 @@
+angular.module("klantApp", ["ngRoute", "ngAnimate", "ngTouch", "ngSanitize", "winkelServices"]);

@@ -1,0 +1,7 @@
+<div class="col-2 m-2 cursor-pointer ngFade"
+     ng-repeat="m in model.merken | limitTo:filter.merk.aantal track by m.Merk_Nummer"
+     ng-click="merk.kies(m);">
+    <img class="product-image product-image-responsive d-block" ng-src="{{model.foto.url(m.Foto_Nummer)}}" />
+    <span class="d-none d-lg-block text-primary">{{m.Merk_Naam}}</span>
+</div>
+<div class="w-100 py-3 text-center"><button class="btn btn-secondary text-primary" ng-click="filter.merk.vergroot(10)">Meer &hellip;</button></div>

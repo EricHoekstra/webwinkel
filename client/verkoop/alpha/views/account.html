@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col-12 pt-3">
+        <div class="float-left col-2">
+            <p><a href="producten">Winkel verder</a></p>
+        </div>
+        <div class="float-left col-10">
+            <h3>Uw gegevens</h3>
+            <table class="table table-sm table-hover">
+                <tbody>
+                    <tr>
+                        <td>Nummer</td>
+                        <td>{{model.account.Nummer}}</td>
+                    </tr>
+                    <tr>
+                        <td>Naam</td>
+                        <td>{{model.account.Naam}}</td>
+                    </tr>
+                    <tr>
+                        <td>E-mailadres</td>
+                        <td>{{model.account.EmailAdres}}</td>
+                    </tr>
+                    <tr>
+                        <td>Geslacht</td>
+                        <td>{{model.account.Geslacht}}</td>
+                    </tr>
+                    <tr>
+                        <td>Taal</td>
+                        <td>{{model.account.Taal}}</td>
+                    </tr>
+                    <tr>
+                        <td>Foto</td>
+                        <td><img class="rounded-circle" style="height: 50px;" ng-src="{{model.account.FotoUrl}}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Geblokkeerd</td>
+                        <td>{{model.account.Geblokkeerd ? "ja" : "nee"}}</td>
+                    </tr>
+                    <tr>
+                        <td>Laatste inlog</td>
+                        <td>{{model.account.LaatsteInlog | toLocalDateString: model.account.Taal}}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

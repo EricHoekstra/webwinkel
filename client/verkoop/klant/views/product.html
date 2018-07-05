@@ -1,0 +1,56 @@
+<div class="col p-0">
+    <h3>{{model.product.Product_Productnaam}}</h3>
+    <div class="d-flex flex-wrap justify-content-between">
+        <div class="col-4 border-bottom border-secondary">
+            <img class="product-image product-image-large" ng-src="{{model.foto.url(model.product.Foto_Nummer)}}" />
+        </div>
+        <div class="col-8 border-bottom border-secondary">
+            <form name="voegtoeFormulier" novalidate>
+                <div class="form-group">
+                    <p class="d-flex">
+                        <input id="productAantal"
+                               name="productAantal"
+                               type="number"
+                               required
+                               class="form-control text-center"
+                               style="width: 4em;"
+                               ng-model="product.aantal"
+                               ng-pattern="/^[0-9]{1,}$/"
+                               min="1" />
+                        <span class="pl-2"></span>
+                        <button type="button"
+                                ng-class="{'btn': true, 'btn-success': !product_geklikt, 'btn-outline-success': product_geklikt}"
+                                ng-click="bestelling.voegtoe(model.product, product.aantal); product_geklikt = true;"
+                                ng-disabled="!model.product.Product_Voorraad"
+                                >
+                            Bestel
+                        </button>
+                    </p>
+                    <p ng-show="voegtoeFormulier.productAantal.$invalid && voegtoeFormulier.productAantal.$dirty && model.product.Product_Voorraad"
+                       class="text-info">Kiest u minimaal 1 artikel.</p>
+                </div>
+            </form>
+        </div>
+        <div class="col-4 py-2 border-bottom border-secondary">Prijs</div>
+        <div class="col-8 py-2 border-bottom border-secondary">{{model.product.Product_Prijs | currency}}</div>
+        <div class="col-4 py-2 border-bottom border-secondary">Voorraad</div>
+        <div class="col-8 py-2 border-bottom border-secondary" ng-class="(model.product.Product_Voorraad ? null : 'text-info')">{{model.product.Product_Voorraad || "binnenkort"}}</div>
+        <div class="col-4 py-2 border-bottom border-secondary">Merk</div>
+        <div class="col-8 py-2 border-bottom border-secondary">{{model.product.Merk_Naam}}</div>
+        <div class="col-4 py-2 border-bottom border-secondary">Website</div>
+        <div class="col-8 py-2 border-bottom border-secondary"><a target="_blank" href="{{model.product.Merk_Website}}">{{model.product.Merk_Website}}</a></div>
+        <div class="col-4 py-2 border-bottom border-secondary">Product</div>
+        <div class="col-8 py-2 border-bottom border-secondary">{{model.product.Product_Productnaam}}</div>
+        <div class="col-4 py-2 border-bottom border-secondary">Verpakt per</div>
+        <div class="col-8 py-2 border-bottom border-secondary">{{(!model.product.Product_VerpaktPer || model.product.Product_VerpaktPer == 1 ? "stuk" : model.product.Product_VerpaktPer)}}</div>
+        <div class="col-4 py-2 border-bottom border-secondary">Nummer</div>
+        <div class="col-8 py-2 border-bottom border-secondary">{{model.product.Product_Nummer}}</div>
+        <div class="col-4 py-2 border-bottom border-secondary">GTIN</div>
+        <div class="col-8 py-2 border-bottom border-secondary">{{model.product.Product_GTIN}}</div>
+        <div class="col-4 py-2 border-bottom border-secondary">Groep</div>
+        <div class="col-8 py-2 border-bottom border-secondary">
+            <!-- Ducktyping van de eerste parameter van kies(): het product kent het nummer en het type van de productgroep. -->
+            <a href="" ng-click="productgroep.kies(model.product)">{{model.product.Productgroep_Omschrijving}}</a>
+        </div>
+    </div>
+</div>

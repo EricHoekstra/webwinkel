@@ -1,0 +1,24 @@
+<h1>Bezoekerslog</h1>
+<p>
+    Van ieder ip-adres wordt bijgehouden wanneer voor het laatst de klantclient werd opgevraagd.
+    Op het moment dat de user-agent de index.html-pagina van de klantclient opvraagt, wordt dit gelogd.
+    De whois-gegevens zijn alleen zichtbaar wanneer deze pagina van zekere ip-adressen wordt opgevraagd.
+</p>
+<table>
+    <thead>
+        <tr>
+            <th class="border border-bottom" style="width: 10%">IP-adres</th>
+            <th class="border border-bottom border-left" style="width: 10%">Laatste bezoek</th>
+            <th class="border border-bottom" style="width: 10%">Aantal bezoeken</th>
+            <th class="border border-bottom border-left" style="width: 40%">WhoIs</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="b in bezoekerslog | orderBy : b.LaatsteBezoek : true : dateComparator">
+            <td>{{b.IpAdres}}</td>
+            <td class="border border-left">{{b.LaatsteBezoek}}</td>
+            <td>{{b.AantalBezoeken}}</td>
+            <td class="border border-left">{{b.WhoIs}}</td>
+        </tr>
+    </tbody>
+</table>

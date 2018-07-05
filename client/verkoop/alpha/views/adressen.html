@@ -1,0 +1,101 @@
+<div class="row">
+    <div class="col-12 pt-3">
+        <div class="float-left col-2">
+            <p><a href="producten">Winkel verder</a></p>
+        </div>
+        <div class="float-left col-10">
+            <h3>Electronisch adres</h3>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <div ng-show="model.login.ingelogd">
+                        <label for="email1">E-mailadres (uit uw klantgegevens)</label>
+                        <input type="text"
+                               class="form-control form-control-sm"
+                               id="email1"
+                               ng-value="model.account.EmailAdres"
+                               readonly />
+                    </div>
+                    <div ng-show="!model.login.ingelogd">
+                        <label for="email2">Uw @-mailadres</label>
+                        <input type="text"
+                               class="form-control form-control-sm"
+                               id="email2"
+                               placeholder="billgates@microsoft.com"
+                               ng-model="email.adres"
+                               ng-change="controleerEmail()">
+                        <div class="mt-3 ml-5 mr-5" ng-show="!model.login.ingelogd && email.bekend.Account_EmailBekend">
+                            <div class="card" >
+                                <div class="card-body">
+                                    <p>Uw e-mailadres is bekend bij ons. Waarom logt u niet in? Dan vullen wij de bekende gegevens in.</p>
+                                    <button type="button" class="btn btn-primary" ng-click="model.login.login()">Login via Google</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3>Verzendadres</h3>
+            <div class="form-row">
+                <div class="form-group col-2">
+                    <label for="postcode">Postcode</label>
+                    <input type="text" class="form-control form-control-sm uppercase" id="postcode" placeholder="1012ES" ng-model="model.adressen.verzend.origineel.Adres_Postcode" ng-change="bepaalAdres()">
+                </div>
+                <div class="form-group col-1">
+                    <label for="huisnummer">Nummer</label>
+                    <input type="text" class="form-control form-control-sm" id="huisnummer" placeholder="157" ng-model="model.adressen.verzend.origineel.Adres_Huisnummer" ng-change="bepaalAdres()">
+                </div>
+                <div class="form-group col-1">
+                    <label for="toevoeging">Toevoeging</label>
+                    <input type="text" class="form-control form-control-sm uppercase" id="toevoeging" placeholder="A" ng-model="model.adressen.verzend.origineel.Adres_Toevoeging" ng-change="bepaalAdres()">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label for="straat">Straat</label>
+                    <input type="text" class="form-control form-control-sm" id="straat" placeholder="&hellip;" readonly ng-model="model.adressen.verzend.beeld.Adres_Straatnaam">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label for="straat">Plaats</label>
+                    <input type="text" class="form-control form-control-sm" id="plaats" placeholder="&hellip;" readonly ng-model="model.adressen.verzend.beeld.Adres_Plaats">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-12">
+                    <input type="checkbox" id="factuurAdresGebruiken" ng-model="model.klant.FactuurAdresGebruiken" ng-change="wijzigKlant()">
+                    <label class="form-check-label" for="factuurAdresGebruiken">De factuur mag naar een ander adres.</label>
+                </div>
+            </div>
+            <div ng-show="model.klant.FactuurAdresGebruiken">
+                <h3>Factuuradres</h3>
+                <div class="form-row">
+                    <div class="form-group col-2">
+                        <label for="postcode">Postcode</label>
+                        <input type="text" class="form-control form-control-sm uppercase" id="postcode" placeholder="1011GL" ng-model="model.adressen.factuur.origineel.Adres_Postcode" ng-change="bepaalAdres()">
+                    </div>
+                    <div class="form-group col-1">
+                        <label for="huisnummer">Nummer</label>
+                        <input type="text" class="form-control form-control-sm" id="huisnummer" placeholder="127" ng-model="model.adressen.factuur.origineel.Adres_Huisnummer" ng-change="bepaalAdres()">
+                    </div>
+                    <div class="form-group col-1">
+                        <label for="toevoeging">Toevoeging</label>
+                        <input type="text" class="form-control form-control-sm uppercase" id="toevoeging" placeholder="" ng-model="model.adressen.factuur.origineel.Adres_Toevoeging" ng-change="bepaalAdres()">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <label for="straat">Straat</label>
+                        <input type="text" class="form-control form-control-sm" id="straat" placeholder="&hellip;" readonly ng-model="model.adressen.factuur.beeld.Adres_Straatnaam">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <label for="straat">Plaats</label>
+                        <input type="text" class="form-control form-control-sm" id="plaats" placeholder="&hellip;" readonly ng-model="model.adressen.factuur.beeld.Adres_Plaats">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

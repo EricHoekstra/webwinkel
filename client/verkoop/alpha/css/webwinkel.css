@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Secular+One');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: small;
+}
+
+h1 {
+    font-family: 'Secular One';
+}
+
+.cursor-pointer {
+    cursor: pointer
+}
+
+.uppercase {
+    text-transform: uppercase
+}
+
+.custom-flex-center {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.custom-carousel-page-A {
+    background-color: powderblue;
+    min-height: 500px;
+    font-size: 1.1em;
+    line-height: 2em;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.custom-carousel-page-B {
+}

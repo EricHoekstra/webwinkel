@@ -1,0 +1,25 @@
+<div class="mt-5">
+    <p>We hebben {{(model.producten.length == 0 ? 'nog geen' : model.producten.length)}} artikelen voor u gevonden.</p>
+    <table class="table table-sm table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Merk</th>
+                <th>#</th>
+                <th>Productnaam</th>
+                <th>#</th>
+                <th>Foto_Afbeelding</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="p in model.producten | limitTo: 100" ng-click="product.kies(p)">
+                <td>{{p.Merk_Nummer}}</td>
+                <td>{{p.Merk_Naam}}</td>
+                <td>{{p.Product_Nummer}}</td>
+                <td>{{p.Product_Productnaam}}</td>
+                <td>{{p.Foto_Nummer}}</td>
+                <td><img style="height: 50px;" ng-src="{{model.fotoUrl(p.Foto_Nummer)}}" /></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

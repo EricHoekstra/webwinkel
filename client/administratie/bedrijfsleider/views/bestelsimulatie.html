@@ -1,0 +1,20 @@
+<h1>Simulatie van het bestelproces</h1>
+<p>Een simulatie van druk bezoek op de website. Klanten vragen producten op en plaatsen bestellingen. Het bezoek wordt gesimuleerd, maar de bestellingen worden daadwerkelijk aangemaakt in het model. Van alle bestellingen die worden aangemaakt, wordt een klein deel, 10%, niet geaccordeert door de klant. Dit leidt tot de z.g. vergeten bestellingen. Van de geaccordeerde bestellingen wordt opnieuw 10% niet betaald. </p>
+<form name="simulatieparameters">
+    <ol>
+        <li>
+            <p>
+                De simulatie moet <input type="text" style="width: 3em; text-align: center;" ng-model="simulatie.parameters.aantalBestellingen" /> bestellingen aanmaken met ieder maximaal <input type="text" style="width: 3em; text-align: center;" ng-model="simulatie.parameters.aantalBestelregels" /> bestelregels.
+            </p>
+        </li>
+        <li>
+            <p>
+                <input type="submit" value="Start simulatie" ng-click="simulatie.simuleer()" />
+                <input type="button" value="Stop" ng-click="simulatie.status.actief = false;" />
+            </p>
+            <p><em>{{simulatie.status.melding}}</em></p>
+            <canvas class="simulatie" width="909" height="594" bestelsimulatie="" simulatie="simulatie"></canvas>
+            <!-- Noot op de attributen: bestelsimulatie refereert naar de directive, simulatie refereert naar de eigenschap die uit de scope wordt overgenomen. -->
+        </li>
+    </ol>
+</form>

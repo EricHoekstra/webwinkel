@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-12 pt-3">
+        <div class="float-left col-2">
+        </div>
+        <div class="float-left col-10">
+            <h3>Ons aanbod</h3>
+            <p>
+                <input class="form-control form-control-sm" type="text" placeholder="quick organic oats"
+                       ng-model="query.zoek.vraag"
+                       ng-change="query.zoek.beantwoord()" />
+            </p>
+            <p>
+                <span ng-show="query.zoek.vraag" ng-click="query.zoek.wis();" class="cursor-pointer text-danger">
+                    <i class="fas fa-times"></i>
+                </span>
+                <span ng-show="query.zoek.vraag">U zoekt op: {{query.zoek.toon()}}.</span>
+                &nbsp;
+            </p>
+            <div class="d-flex flex-row flex-wrap">
+                <div class="cursor-pointer custom-flex-center border border-light rounded mr-1 mt-1"
+                     style="height: 3em; width: 10em;"
+                     ng-repeat="m in model.merken"
+                     ng-click="query.merk.kies(m)"
+                     ng-class="( m.Merk_Nummer == query.merk.nummers ? 'bg-primary text-light' : 'bg-light text-dark')">
+                    {{m.Merk_Naam}}
+                </div>
+            </div>
+            <p>&nbsp;</p>
+            <div>
+                <table class="table table-sm table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Merk</th>
+                            <th>#</th>
+                            <th>Productnaam</th>
+                            <th>#</th>
+                            <th>Foto_Afbeelding</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="p in model.producten" ng-click="product.kies(p)">
+                            <td>{{p.Merk_Nummer}}</td>
+                            <td>{{p.Merk_Naam}}</td>
+                            <td>{{p.Product_Nummer}}</td>
+                            <td>{{p.Product_Productnaam}}</td>
+                            <td>{{p.Foto_Nummer}}</td>
+                            <td><img style="height: 50px;" ng-src="{{model.fotoUrl(p.Foto_Nummer)}}" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

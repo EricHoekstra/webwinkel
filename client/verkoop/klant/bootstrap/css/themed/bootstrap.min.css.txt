@@ -1,0 +1,5 @@
+Bootstrap.min.css
+-----------------
+Het bestand bootstrap.min.css is een symbolic link naar '/var/www/html/documents/Vakgebied/Webdevelopment/
+Bootstrap Theme Kit/css/mytheme.min.css'. De webserver volgt de link en bedient met mytheme.min.css, maar 
+de mod_dav module van Apache negeert de link en toont niets.

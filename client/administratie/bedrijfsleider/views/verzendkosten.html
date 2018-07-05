@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col">
+        <h1>Verzendkosten</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <h2>Verzendkosten</h2>
+        <p>Supermarkt.nl berekent de verzendkosten uit de afstand tussen het verzendadres en de prijs van de bestelling. Twee op&eacute;&eacute;nvolgende rijen vormen steeds een ondergrens (inclusief) en bovengrens van een categorie. De verzendkosten staan bij de ondergrens genoteerd.</p>
+        <form name="verzendkostenForm" ng-submit="opslaan()">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="border border-bottom">Nummer</th>
+                        <th class="border border-left border-bottom">Prijs</th>
+                        <th class="border border-bottom">Afstand</th>
+                        <th class="border border-left border-bottom">Kosten</th>
+                        <th class="border border-left border-bottom"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="v in verzendkosten track by $index">
+                        <td>{{v.Verzendkosten_Nummer}}</td>
+                        <!-- De attributen input-type-currency en input-type-distance verwijzen naar de gelijknamige directives. -->
+                        <td class="border border-left"><input type="text" input-type-currency="" style="width: 5em;" ng-model="v.Verzendkosten_Prijs" ng-change="" /></td>
+                        <td><input type="text" input-type-distance="" style="width: 5em;" ng-model="v.Verzendkosten_Afstand" ng-change="wijzig()" /></td>
+                        <td class="border border-left"><input type="text" input-type-currency="" style="width: 5em;" ng-model="v.Verzendkosten_Kosten" ng-change="" /></td>
+                        <td class="border border-left"><input type="button" ng-click="wis(v)" value="Wis" /></td>
+                    </tr>
+                    <tr>
+                        <td class="border border-top"></td>
+                        <td class="border border-left border-top" colspan="4">
+                            <input type="button" ng-click="nieuw()" value="Nieuw" />
+                            <input type="submit" ng-disabled="!verzendkostenForm.$dirty" value="Opslaan" />
+                            <span ng-show="!verzendkosten.$resolved">Verwerken ...</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><em>{{foutmelding}}</em> <span ng-show="foutmelding">Zie voor meer info het <a href="/webwinkel/docs/Ontwerp.docx">ontwerp</a> (Microsoft Word nodig).</span></p>
+        </form>
+    </div>
+    <div class="col-6">
+        <h2>Controleberekening</h2>
+        <p>Controleer het resultaat in onderstaand formulier.</p>
+        <form>
+            <table>
+                <tr class="border border-top">
+                    <td>Prijs van een bestelling [euro]</td>
+                    <td>
+                        <input type="text" input-type-currency="" style="width: 5em;" ng-model="berekening.Bestelling_Prijs" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Afstand tussen distributiecentrum en verzendadres [km]</td>
+                    <td>
+                        <input type="text" input-type-distance="" style="width: 5em;" ng-model="berekening.Adresklant_Afstand" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" ng-disabled="verzendkostenForm.$dirty" ng-click="bereken()" value="Bereken" /></td>
+                </tr>
+                <tr class="border border-top">
+                    <td title="Model, prijs = {{berekening.Bestelling_Prijs}}, afstand = {{berekening.Adresklant_Afstand}}">Verzendkosten</td>
+                    <td ng-show="berekening.$resolved">{{(berekening.Verzendkosten_Kosten | currency) || "onbepaald"}}</td>
+                    <td ng-show="!berekening.$resolved">&hellip;</td>
+                </tr>
+            </table>
+            <p colspan="2"><em>{{berekening.foutmelding}}</em></p>
+        </form>
+    </div>
+</div>

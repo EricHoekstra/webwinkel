@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-12 pt-3">
+        <p>
+            Inloggen doet u op deze site met OpenID Connect verzorgd door Google. U logt in <a href="https://myaccount.google.com/">bij Google</a>
+            zodat u daarmee een aantal gegevens verstrekt aan deze webwinkel. Die gegevens leest u, wanneer u ingelogd bent, bij
+            <a href="account">uw klantgegevens</a> terug. Bij ieder bezoek van deze site worden die gegevens opnieuw
+            overgenomen van Google, zodat u automatisch wijzigingen doorgeeft danwel gegevens verwijdert. 
+            Deze manier van werken heeft als voordeel dat deze website geen wachtwoorden opgeslaat en dus ook minder
+            aantrekkelijk is voor gegevensdiefstal. Het nadeel is dat Google registreert wanneer u op deze site inlogt.
+        </p>
+        <p ng-show="model.login.ingelogd">U bent reeds ingelogd bij deze webwinkel.</p>
+        <p ng-show="!model.login.ingelogd">
+            <button type="button" class="btn btn-primary" ng-click="model.login.login()">Login via Google</button>
+        </p>
+    </div>
+</div>

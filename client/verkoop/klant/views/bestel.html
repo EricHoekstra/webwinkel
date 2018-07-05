@@ -1,0 +1,70 @@
+<div class="col">
+    <h3>Uw bestelling</h3>
+    <div class="row">
+        <div class="col">
+            <div>
+                <p><i class="fas fa-shopping-cart "></i> Wij verzenden het volgende:</p>
+                <div class="d-flex justify-content-between border-bottom border-secondary" ng-repeat="bestelregel in model.bestelregels track by bestelregel.Product_Nummer">
+                    <p class="my-1">
+                        {{bestelregel.Merk_Naam}} {{bestelregel.Product_Productnaam}}, {{bestelregel.Bestelregel_Aantal}} &times; {{bestelregel.Product_Prijs | currency}}
+
+                    </p>
+                    <p class="my-1">
+                        {{bestelregel.Bestelregel_Prijs | currency}}
+                    </p>
+                </div>
+                <div class="d-flex justify-content-between border-bottom border-secondary">
+                    <p class="my-1">Subtotaal</p>
+                    <p class="my-1 font-weight-bold">{{model.bestelling.Bestelling_Prijs | currency}}</p>
+                </div>
+                <div class="d-flex justify-content-between border-bottom border-secondary">
+                    <p class="my-1">
+                        Verzendkosten, berekend uit {{(model.adressen.verzend.origineel.Adresklant_Afstand / 1000) || 0 | number : 0}} km en het subtotaal
+                    </p>
+                    <p class="my-1">{{model.bestelling.Verzendkosten_Kosten || 0 | currency}}</p>
+                </div>
+                <div class="d-flex justify-content-between border-bottom border-secondary">
+                    <p class="my-1">Totaal</p>
+                    <p class="my-1 font-weight-bold">{{model.bestelling.Bestelling_Prijs + model.bestelling.Verzendkosten_Kosten || 0 | currency}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-auto col-lg-4">
+            <p><i class="fas fa-home"></i> Naar het volgende adres:</p>
+            <p>
+                {{model.adressen.verzend.beeld.Adres_Straatnaam}} {{model.adressen.verzend.beeld.Adres_Huisnummer}} {{model.adressen.verzend.beeld.Adres_Toevoeging}} <br />
+                {{model.adressen.verzend.beeld.Adres_Postcode}} {{model.adressen.verzend.beeld.Adres_Plaats}}
+            </p>
+        </div>
+        <div class="col-auto col-lg-4" ng-show="model.klant.FactuurAdresGebruiken">
+            <p><i class="fas fa-location-arrow "></i> De factuur sturen wij naar:</p>
+            <p>
+                {{model.adressen.factuur.beeld.Adres_Straatnaam}} {{model.adressen.factuur.beeld.Adres_Huisnummer}} {{model.adressen.factuur.beeld.Adres_Toevoeging}} <br />
+                {{model.adressen.factuur.beeld.Adres_Postcode}} {{model.adressen.factuur.beeld.Adres_Plaats}}
+            </p>
+        </div>
+        <div class="col-auto col-lg-4">
+            <p><i class="fas fa-at"></i> Electronisch communiceren wij met u op:</p>
+            <p>{{(model.login.ingelogd ? model.account.EmailAdres : model.klant.EmailAdres)}}</p>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col">
+            <p><i class="fas fa-file-alt "></i> Met het plaatsen van bovenstaande bestelling gaat u akkoord met de <a href="">algemene voorwaarden</a> van deze webwinkel.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col d-flex justify-content-between">
+            <a href="adressen/true" class="btn btn-success">
+                Terug
+            </a>
+            <button type="button" class="btn btn-success" 
+                    ng-click="bestel_geklikt = true; bestelling.plaats();"
+                    ng-disabled="bestel_geklikt">
+                Akkoord
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="bedrijfsleiderApp">
+<head>
+    <base href="https://www.erichoekstra.com/webwinkel/bedrijfsleider/index.html" />
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Supermarkt.nl | Bedrijfsleider</title>
+
+    <!-- AngularJS -->
+    <script src="/webwinkel/gedeeld/script/angularjs/1.7.2/angular.min.js"></script>
+    <script src="/webwinkel/gedeeld/script/angularjs/1.7.2/angular-route.js"></script>
+    <script src="/webwinkel/gedeeld/script/angularjs/1.7.2/angular-resource.js"></script>
+    <script src="/webwinkel/gedeeld/script/angularjs/1.7.2/angular-animate.min.js"></script>
+    <script src="/webwinkel/gedeeld/script/angularjs/angular-locale_nl-nl.js"></script>
+
+    <!-- D3, https://github.com/d3/d3/releases -->
+    <script src="/webwinkel/gedeeld/script/d3/5.4.0/d3.js"></script>
+
+    <!-- Logica van deze applicatie, eerst de services ... -->
+    <script src="/webwinkel/gedeeld/script/modules/modules.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/account.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/adres.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/bestel.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/bezoekerslog.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/configuratie.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/product.js"></script>
+    <script src="/webwinkel/gedeeld/script/filters/toLocalDateString.js"></script>
+
+    <!-- ... en de logica van deze client. -->
+    <script src="modules/modules.js"></script>
+    <script src="routes/routes.js"></script>
+    <script src="directives/wegenkaart.js"></script>
+    <script src="directives/voorraadgrafiek.js"></script>
+    <script src="directives/bestelsimulatie.js"></script>
+    <script src="directives/input.js"></script>
+    <script src="controllers/standaard.js"></script>
+    <script src="controllers/bezoekerslog.js"></script>
+    <script src="controllers/verzend.js"></script>
+    <script src="controllers/verzendkosten.js"></script>
+    <script src="controllers/bestelsimulatie.js"></script>
+    <script src="controllers/rapportage.js"></script>
+    <script src="controllers/voorraad.js"></script>
+    <script src="controllers/opdrachten.js"></script>
+
+    <!-- De Google Maps API -->
+    <script>function initMap() { console.info("Google Maps API geladen.") }</script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACLvn6ozLYYWJctVLW49E2mp7meDUwetw&callback=initMap"></script>
+
+    <!-- -->
+    <style>
+        body {
+            margin: 0px;
+            line-height: 1.5rem;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        .container {
+            min-height: 100vh;
+            height: 100%;
+        }
+
+        .row {
+            display: flex;
+        }
+
+        .col {
+            flex: 0 1 auto;
+            padding: 10px;
+        }
+
+        .col-2 {
+            flex: 0 1 17%;
+            padding: 10px;
+        }
+
+        .col-3 {
+            flex: 0 1 25%;
+            padding: 10px;
+        }
+
+        .col-6 {
+            flex: 0 1 50%;
+            padding: 10px;
+        }
+
+        .col-9 {
+            flex: 0 1 75%;
+            padding: 10px;
+        }
+
+        .col-10 {
+            flex: 0 1 83%;
+            padding: 10px;
+        }
+
+        .col-12 {
+            flex: 0 1 100%;
+            padding: 10px;
+        }
+
+        .nav {
+            background-color: lightgray;
+        }
+
+            .nav a {
+                text-decoration: none;
+                color: black;
+            }
+
+        .border {
+        }
+
+            .border.border-left {
+                border-left: 1px solid black;
+            }
+
+            .border.border-bottom {
+                border-bottom: 1px solid black;
+            }
+
+            .border.border-top {
+                border-top: 1px solid black;
+            }
+
+        .lead {
+            font-size: 2em;
+        }
+
+        .pl-0, .pr-0, .p-0 {
+            padding: 0;
+        }
+
+        .pl-3, .pr-3, p-3 {
+            padding: 9px;
+        }
+
+        .scoreboard {
+            background-color: black;
+            color: white;
+            font-family: Courier New, Courier, monospace;
+            height: 3em;
+            border: 10px solid black;
+        }
+
+            .scoreboard .kopje {
+                font-weight: bold;
+            }
+
+            .scoreboard .score {
+                font-weight: bold;
+            }
+
+            .scoreboard .indicator {
+                display: inline-block;
+                border: 1px solid white;
+                width: 10px;
+                height: 10px;
+            }
+
+                .scoreboard .indicator.on {
+                    background-color: white;
+                }
+
+                .scoreboard .indicator.off {
+                    background-color: black;
+                }
+
+        .wegenkaart {
+            width: 900px;
+            height: 600px;
+            border: 1pt lightgrey solid;
+            background-color: lightgrey;
+        }
+
+            .wegenkaart.onderschrift {
+                height: initial;
+                border: initial;
+                background-color: initial;
+            }
+
+        .simulatie {
+            background-color: white;
+            border: 1px solid gray;
+        }
+
+        .voorraadgrafiek {
+            width: 900px;
+            height: 900px;
+        }
+
+            .voorraadgrafiek .node.node-element.node-focus circle {
+                stroke: coral;
+                stroke-width: 1.5px;
+            }
+
+        .cursor-pointer {
+            cursor: pointer
+        }
+
+        .licht {
+            color: gray;
+        }
+
+        .opvallend {
+            color: coral;
+        }
+    </style>
+
+</head>
+<body ng-controller="standaardController">
+    <div class="container row">
+        <div class="col-2 nav">
+            <p><a href="startpagina">Startpagina</a></p>
+            <p><a href="bezoekerslog">Bezoekerslog</a></p>
+            <p><a href="voorraad">Voorraad</a></p>
+            <p><a href="verzendkosten">Verzendkosten</a></p>
+            <p><a href="bestelsimulatie">Bestelprocessimulatie</a></p>
+            <p><a href="verzend">Verzend bestellingen</a></p>
+            <p><a href="rapportage">Rapportage</a></p>
+            <p><a href="opdrachten">Opdrachten</a></p>
+            <p style="border-bottom: 1px solid white"></p>
+            <p><a href="/webwinkel/klant/">Verder als klant</a></p>
+            <p><a href="/webwinkel/gedeeld/pagina/browsercompatibiliteit.html">Browsercompatibiliteit</a></p>
+        </div>
+        <div class="col-10" ng-view></div>
+    </div>
+</body>
+</html>

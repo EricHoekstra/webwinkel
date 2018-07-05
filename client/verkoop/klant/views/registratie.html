@@ -1,0 +1,70 @@
+<div class="col">
+    <h3>Registratie</h3>
+    <div ng-show="!model.login.ingelogd">
+        <p>Logt u in voor het vereenvoudigen van de bestelling en het bekijken van eerder gemaakte bestellingen.</p>
+        <p>
+            <button type="button" class="btn btn-primary"
+                    ng-click="login_geklikt = true; login()"
+                    ng-disabled="login_geklikt">
+                Login via Google
+            </button>
+            <span class="pl-3 text-primary fade-in" ng-show="login_geklikt"><i class="fas fa-circle-notch fa-spin"></i> U wordt doorgestuurd naar Google ... </span>
+        </p>
+        <p>
+            De registratie van uw gebruikersnaam en wachtwoord wordt met OpenID Connect verzorgd door Google.
+            U geeft deze webwinkel toestemming voor het overnemen van een aantal basisgegevens uit uw
+            <a target="_blank" href="https://myaccount.google.com/">Google Account</a>.
+            Deze manier van werken heeft als voordeel dat deze website geen wachtwoorden opslaat en dus ook minder
+            aantrekkelijk is voor gegevensdiefstal. Het nadeel is dat Google registreert wanneer u op deze site inlogt.
+        </p>
+    </div>
+    <div ng-show="model.login.ingelogd">
+        <p>Uw gegevens</p>
+        <div class="row">
+            <div class="col col-lg-8">
+                <div class="d-flex justify-content-between align-items-center border-bottom border-secondary">
+                    <p class="my-1">Nummer</p>
+                    <p class="my-1">{{model.account.Nummer}}</p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center border-bottom border-secondary">
+                    <p class="my-1">Naam</p>
+                    <p class="my-1">{{model.account.Naam}}</p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center border-bottom border-secondary">
+                    <p class="my-1">E-mailadres</p>
+                    <p class="my-1">{{model.account.EmailAdres}}</p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center border-bottom border-secondary">
+                    <p class="my-1">Foto</p>
+                    <p class="my-1"><img class="rounded-circle" style="height: 50px;" ng-src="{{model.account.FotoUrl}}" /></p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center border-bottom border-secondary">
+                    <p class="my-1">Geslacht</p>
+                    <p class="my-1">{{model.account.Geslacht}}</p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center border-bottom border-secondary">
+                    <p class="my-1">Taal</p>
+                    <p class="my-1">{{model.account.Taal}}</p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center border-bottom border-secondary">
+                    <p class="my-1">Geblokkeerd</p>
+                    <p class="my-1">{{model.account.Geblokkeerd ? "ja" : "nee"}}</p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center border-bottom border-secondary">
+                    <p class="my-1">Laatste inlog</p>
+                    <p class="my-1">{{model.account.LaatsteInlog | toLocalDateString: model.account.Taal }}</p>
+                </div>
+            </div>
+            <div class="col col-lg-4">
+                <p class="my-1">Wijzig uw gegevens in uw Google Account. Bij de volgende inlog worden deze door ons overgenomen.</p>
+                <p class="my-1">
+                    <a class="btn btn-primary" target="_blank" href="https://myaccount.google.com/">Wijzig</a>
+                </p>
+                <p class="mt-3 mb-1">U bent reeds ingelogd bij deze webwinkel. Wilt u soms uitloggen?</p>
+                <p class="my-1">
+                    <button type="button" class="btn btn-primary" ng-click="logout()">Uitloggen</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

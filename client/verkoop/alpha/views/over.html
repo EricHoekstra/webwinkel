@@ -1,0 +1,120 @@
+<div class="row">
+    <div class="col-6 pt-3 mx-auto">
+        <div id="carousel1" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner border border-light rounded">
+                <div class="carousel-item active">
+                    <div class="custom-carousel-page-A p-5">
+                        <h4>Architectuur</h4>
+                        <table>
+                            <tr class="align-top">
+                                <td>
+                                    <ul>
+                                        <li>
+                                            Client &#8596; Server &#8596; Database<br />
+                                            <img src="afbeelding/client-server-model.png" class="img-fluid" style="max-height: 150px;" title="Bron: https://en.wikipedia.org/wiki/Client-server_model" />
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li>
+                                            Model View Controller <br />
+                                            <img src="afbeelding/mvc.png" class="img-fluid" style="max-height: 200px;" title="Bron: https://nl.wikipedia.org/wiki/Model-view-controller-model" />
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr class="align-top">
+                                <td>
+                                    <ul>
+                                        <li>
+                                            AngularJS, NodeJS, CentOS
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li>Minimale afhankelijkheid, maximale samenhang</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="custom-carousel-page-A p-5">
+                        <h4>Server</h4>
+                        <ul>
+                            <li>
+                                <img src="afbeelding/nodejs.png" class="float-right" style="max-width: 200px" />
+                                Geschreven in NodeJS, JavaScript
+                            </li>
+                            <li>
+                                Biedt een REST-API aan op <a href="/webwinkel/api">https://www.erichoekstra.com/webwinkel/api</a>.
+                                Voorbeelden van resources: <a href="/webwinkel/api/product/62200">product</a>,
+                                <a href="/webwinkel/api/foto/1">foto</a>,
+                                <a href="/webwinkel/api/product/merk">merk</a>,
+                                <a href="/webwinkel/api/adres/1012ES/157/A">adres</a>,
+                                &hellip;
+                            </li>
+                            <li>Volgt het Model-View-Controller-patroon.</li>
+                            <li>Script <em>import-afbeeldingen.js</em> voor het importeren van foto's. Dit script wordt uitgevoerd op de server in een terminalsessie. </li>
+                            <li>
+                                <img src="afbeelding/openid.png" class="float-right" style="max-height: 50px;" />
+                                Ondersteunt OpenID; voorlopig alleen Google als provider.
+                            </li>
+                            <li>Ge&iuml;nstalleerd als een CentOS service in <em>init.d</em>.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="custom-carousel-page-A p-5">
+                        <h4>Database</h4>
+                        <ul>
+                            <li>
+                                <img src="afbeelding/sqlite.png" class="float-right" style="max-width: 100px;" />
+                                Van de database (en de rest van de applicatie) is een <a href="/webwinkel/Ontwerp.docx">ontwerp</a>.
+                            </li>
+                            <li>De Adres-tabel bevat alle adressen in Den Haag en Amsterdam tot op toevoeging. Dat zijn een kleine 800.000 adressen.</li>
+                            <li>Van 3.746 merken zijn in totaal 451.821 producten vastgelegd.</li>
+                            <li>De server bedient alleen producten met een foto, door middel van een join, dat zijn er 1.881. Totaal kent de database 2.329 foto's.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="custom-carousel-page-A p-5">
+                        <h4>Clients</h4>
+                        <ul>
+                            <li>
+                                <img src="afbeelding/bootstrap-angular.png" class="float-right" style="max-width: 200px;" />
+                                Geschreven in AngularJS, Bootstrap, JavaScript, dus met HTML5-mogelijkheden en de Flexbox uit CSS.
+                            </li>
+                            <li>Volgt het Model-View-Controller-patroon en de andere patronen in AngularJS, zoals <em>dependency injection</em>.</li>
+                            <li>Een client voor de klant.</li>
+                            <li>Voor de bedrijfsleider.</li>
+                            <li>Voor de <a href="startpagina">ontwikkelaar</a>. Deze client dient voor opbouw van de functionaliteit.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="custom-carousel-page-A p-5">
+                        <h4>Apps</h4>
+                        <p>
+                            Van dezelfde ontwikkelaar: <a href="https://www.inflatiecalculator.nl">inflatiecalculator</a> voor een introductie in AngularJS,
+                            <a href="/hofstadter">Hofstadter's MU</a> voor het werken met Webworkers.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" style="width: 5%" href="#carousel1" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+                <span class="sr-only">Vorige</span>
+            </a>
+            <a class="carousel-control-next" style="width: 5%" href="#carousel1" role="button" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+                <span class="sr-only">Volgende</span>
+            </a>
+        </div>
+
+    </div>
+</div>

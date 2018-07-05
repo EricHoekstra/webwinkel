@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="klantApp">
+<head>
+    <base href="https://www.erichoekstra.com/webwinkel/klant/index.html" />
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="fragment" content="!" />
+    <noscript>
+        <!-- Geen script dan naar de compatibiliteitspagina. -->
+        <meta http-equiv="refresh" content="0; url=/webwinkel/gedeeld/pagina/browsercompatibiliteit.html">
+    </noscript>
+    <title>Supermarkt.nl | Klant</title>
+
+    <!-- Modernizer -->
+    <script src="/webwinkel/gedeeld/script/modernizr/modernizr-custom.js"></script>
+    <script>
+        if (
+            !(
+                Modernizr.bgsizecover
+                && Modernizr.cookies
+                && Modernizr.cssanimations
+                && Modernizr.cssvhunit
+                && Modernizr.es6string
+                && Modernizr.flexbox
+                && Modernizr.flexwrap
+                && Modernizr.fontface
+                && Modernizr.history
+                && Modernizr.input
+                && Modernizr.inputtypes
+                && Modernizr.json
+                && Modernizr.mediaqueries
+                && Modernizr.opacity
+                && Modernizr.localstorage
+            )
+            && !/compatibiliteit\=probeer/.test(location.search)
+        ) {
+            window.location = "/webwinkel/gedeeld/pagina/browsercompatibiliteit.html";
+        }
+    </script>
+
+    <!-- Voor applicatiebeheer -->
+    <script>
+        document.onreadystatechange = function () {
+            if (document.readyState == "loading")
+                document.getElementById("documentGeladenIcoon").style.display = "none";
+            else if (document.readyState == "complete") {
+                document.getElementById("documentGeladenIcoon").style.display = "block";
+                console.info("Client geladen voor wat betreft de browser.");
+            }
+        };
+    </script>
+
+    <!-- AngularJS -->
+    <script src="/webwinkel/gedeeld/script/angularjs/1.7.2/angular.min.js"></script>
+    <script src="/webwinkel/gedeeld/script/angularjs/1.7.2/angular-route.js"></script>
+    <script src="/webwinkel/gedeeld/script/angularjs/1.7.2/angular-resource.js"></script>
+    <script src="/webwinkel/gedeeld/script/angularjs/1.7.2/angular-animate.min.js"></script>
+    <script src="/webwinkel/gedeeld/script/angularjs/1.7.2/angular-touch.min.js"></script>
+    <script src="/webwinkel/gedeeld/script/angularjs/1.7.2/angular-sanitize.min.js"></script>
+    <script src="/webwinkel/gedeeld/script/angularjs/angular-locale_nl-nl.js"></script>
+
+    <!-- Logica van deze applicatie, eerst de services ... -->
+    <script src="/webwinkel/gedeeld/script/modules/modules.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/configuratie.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/account.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/adres.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/klant.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/product.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/foto.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/bestel.js"></script>
+    <script src="/webwinkel/gedeeld/script/filters/toLocalDateString.js"></script>
+
+    <!-- ... en de logica van deze client. -->
+    <script src="modules/modules.js"></script>
+    <script src="routes/routes.js"></script>
+    <script src="model/model.js"></script>
+    <script src="controllers/standaard.js"></script>
+    <script src="controllers/product.js"></script>
+    <script src="controllers/account.js"></script>
+    <script src="controllers/adres.js"></script>
+    <script src="controllers/keuzehulp.js"></script>
+    <script src="controllers/bestelhistorie.js"></script>
+    <script src="directives/winkelwagen.js"></script>
+    <script src="directives/emailadresbekend.js"></script>
+
+    <!-- Overgenomen (via symbolic links op de server, link 'theme-kit') uit het project Bootstrap Theme Kit. Alleen de css is aangepast, maar jquery en popper worden ook uit dat project overgenomen, zodat de versies bij elkaar passen. -->
+    <link rel="stylesheet" href="bootstrap/css/themed/bootstrap.min.css" />
+    <script src="jquery/jquery.slim.min.js" crossorigin="anonymous"></script>
+    <script src="popper/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="bootstrap/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+    <!-- Fontawesome -->
+    <script src="/webwinkel/gedeeld/script/fontawesome/5.0.8/fontawesome-all.js"></script>
+
+</head>
+<body class="achtergrond" ng-controller="standaardController">
+    <div class="container bg-light bg-opacity" style="min-height: 200vh; height: 100%">
+        <!-- Topbalk met aanprijzingen en navigatie. -->
+        <div ng-include="'views/navigatie.html'"></div>
+        <!-- Kop-, hoofd- en voettekst. -->
+        <div class="row">
+            <div class="col-11 mx-auto">
+                <!-- Vak met een aanbieding en de productController. Margin-top moet nog opgelost worden. -->
+                <div class="row p-2 border border-dark bg-secondary"
+                     ng-include="'views/aanbieding.html'"
+                     ng-controller="productController"
+                     ng-hide="verbergAanbieding"
+                     ng-swipe-left="verbergAanbieding = true;"
+                     ng-swipe-right="verbergAanbieding = true;">
+                </div>
+                <!-- Wisselende schermen, ng-view -->
+                <div class="row mt-5" ng-view autoscroll></div> 
+                <!-- Voettekst -->
+                <div class="row mt-5 px-2 py-3 border border-dark bg-secondary" ng-include="'views/voet.html'"></div>
+                <!-- Indicatie dat de pagina geladen is. -->
+                <div id="documentGeladenIcoon" class="row my-4 bg-primary" style="display: none; width: 20px; height: 20px;"></div>
+            </div>
+        </div>
+        <!-- Disclaimer -->
+        <div ng-include="'views/disclaimer.html'"></div>
+    </div>
+</body>
+</html>

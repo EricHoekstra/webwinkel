@@ -1,0 +1,23 @@
+#!/bin/bash
+
+port="16328"
+host="Twiki6"
+prog="node /var/www/html/documents/Vakgebied/Webdevelopment/Webwinkel/router/router.js"
+
+# Eerste uitvoering alleen dry-run waarmee gecontroleer wordt of de server wel kan starten. 
+# Daarna en apart proces afsplitsen waarin de server werkelijk gaat luisteren.
+
+exec 3>/var/log/node/webwinkel_debug_log
+echo "Controle van precondities met --dry-run." >&3 
+
+sudo -u apache $prog --port $port --host $host --dry-run >&3
+
+RC=$?
+
+if [ $RC -eq 0 ]
+then
+   sudo -u apache $prog --port $port --host $host >&3 &
+   exit 0
+fi
+
+exit $RC

@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col">
+        <h1>Opdrachten</h1>
+        <p>Laat een opdracht in het model uitvoeren en bekijk de resultaten. Opdrachten zijn batchjobs die in de database worden uitgevoerd. Bij iedere job is een rapport gedefinieerd dat het resultaat van de verwerking inzichtelijk maakt.</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        <p><select ng-model="opdracht" ng-options="opdracht.Opdracht_Naam for opdracht in opdrachten" ng-change="zeker = false;"></select></p>
+        <p>Weet u het zeker? <input type="checkbox" ng-model="zeker"/> Ja </p>
+        <p><button ng-disabled="!zeker || !opdracht" ng-click="kies()">Uitvoeren</button>  </p>
+    </div>
+    <div class="col">
+        <p>{{opdracht.Opdracht_Omschrijving}}</p>
+    </div>
+    <div class="col" ng-show="laden"><p>De opdracht wordt uitgevoerd ...</p></div>
+    <div class="col" ng-show="opdracht.Opdracht_Rapport_Resultaat && !laden">
+        <p>
+            U liet de opdracht <em>{{opdracht.Opdracht_Naam}}</em> uitvoeren. 
+        </p>
+        <p>
+            Het resultaat van de opdracht: 
+            <ul><li ng-repeat="(key, value) in opdracht.Opdracht_Rapport_Resultaat">{{key}}: {{value}}</li></ul>
+        </p>
+    </div>
+</div>

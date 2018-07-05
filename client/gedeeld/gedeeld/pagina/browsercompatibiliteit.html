@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="klantApp">
+<head>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Browsercompatibiliteit</title>
+    <script src="/webwinkel/gedeeld/script/modernizr/modernizr-custom.js"></script>
+</head>
+<body>
+    <h1>Browsercompatibiliteit</h1>
+    <p><em>Niet compatibel</em></p>
+    <p>
+        U gebruikt een browser die een aantal mogelijkheden niet biedt die deze webwinkel wel vereist. Deze webwinkel vereist alle onderstaande opties. Het kan zijn dat uw browser deze deels wel ondersteund, maar niet allemaal. De laatste versies van de gangbare browsers, zoals: Google Chrome, Firefox en Microsoft Edge bevatten wel de vereiste mogelijkheden. Internet Explorer 11 bijvoorbeeld weer niet.
+    </p>
+    <table border="1" cellpadding="5">
+        <tr><th>Mogelijkheid</th><th>Deze browser</th></tr>
+        <tr>
+            <td>JavaScript zonder het noemen van een specifieke versie</td>
+            <td>
+            <script>document.write('ok')</script><noscript>niet ondersteund</noscript></td>
+        </tr>
+        <tr>
+            <td>JavaScript specifiek ECMAScript version 6, handig voor de progammeur</td>
+            <td>
+                <script>(Modernizr.es6string ? document.write('ok') : document.write('niet ondersteund'))</script>
+            </td>
+        </tr>
+        <tr>
+            <td>CSS Background Size Cover, wil de vormgever graag</td>
+            <td>
+                <script>(Modernizr.bgsizecover ? document.write('ok') : document.write('niet ondersteund'))</script>
+            </td>
+        </tr>
+        <tr>
+            <td>CSS Animations, ook voor de vormgever</td>
+            <td>
+                <script>(Modernizr.cssanimations ? document.write('ok') : document.write('niet ondersteund'))</script>
+            </td>
+        </tr>
+        <tr>
+            <td>CSS vh Units, idem.</td>
+            <td>
+                <script>(Modernizr.cssvhunit ? document.write('ok') : document.write('niet ondersteund'))</script>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Cookies, nee niet om u te volgen, maar maakt inloggen en bestellen mogelijk
+            </td>
+            <td>
+                <script>(Modernizr.cookies ? document.write('ok') : document.write('niet ondersteund'))</script>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Flexbox, inclusief Flexwrap, maakt <em>responsive design</em> mogelijk, en dus mobiele schermen
+            </td>
+            <td>
+                <script>(Modernizr.flexbox && Modernizr.flexwrap ? document.write('ok') : document.write('niet ondersteund'))</script>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Fontface, ook voor de vormgever
+            </td>
+            <td>
+                <script>(Modernizr.fontface ? document.write('ok') : document.write('niet ondersteund'))</script>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                History API, maakt gestroomlijnd navigeren door de app mogelijk
+            </td>
+            <td>
+                <script>(Modernizr.history ? document.write('ok') : document.write('niet ondersteund'))</script>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Input en Input Types, handig op mobiele apparaten
+            </td>
+            <td>
+                <script>(Modernizr.input && Modernizr.inputtypes ? document.write('ok') : document.write('niet ondersteund'))</script>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                JSON, voor de programmeur
+            </td>
+            <td>
+                <script>(Modernizr.json ? document.write('ok') : document.write('niet ondersteund'))</script>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Media Queries, laat de app zich aanpassen aan de schermgrootte, zie ook Flexbox
+            </td>
+            <td>
+                <script>(Modernizr.mediaqueries ? document.write('ok') : document.write('niet ondersteund'))</script>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Opacity, voor de vormgever
+            </td>
+            <td>
+                <script>(Modernizr.opacity ? document.write('ok') : document.write('niet ondersteund'))</script>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Local storage, maakt het mogelijk dat de laatst bezochte artikelen worden onthouden.
+            </td>
+            <td>
+                <script>(Modernizr.localstorage ? document.write('ok') : document.write('niet ondersteund'))</script>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Arrow-functies, vinden programmeurs prettig.
+            </td>
+            <td>
+                <script>(Modernizr.arrow ? document.write('ok') : document.write('niet ondersteund'))</script>
+            </td>
+        </tr>
+
+    </table>
+    <p><a href="/webwinkel/klant/?compatibiliteit=probeer">Ik wil het toch proberen ...</a></p>
+</body>
+</html>

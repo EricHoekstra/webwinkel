@@ -1,0 +1,26 @@
+{
+  "name": "webwinkel",
+  "version": "1.0.0",
+  "description": "Webwinkelproject: nut en plezier met Node.js en Angular.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --recursive --no-colors test",
+    "start": "service webwinkeld start",
+    "stop": "service webwinkeld stop",
+    "poststart": "tail /var/log/node/webwinkel_debug_log -n 50 -f"
+  },
+  "author": "Eric Hoekstra",
+  "license": "ISC",
+  "dependencies": {
+    "@google/maps": "^0.4.6",
+    "cookie-session": "^2.0.0-beta.3",
+    "entities": "^1.1.1",
+    "express": "^4.16.3",
+    "googleapis": "^23.0.2",
+    "helmet": "^3.12.1",
+    "modernizr": "^3.6.0",
+    "morgan": "^1.9.0",
+    "nodemailer": "^4.6.6",
+    "sqlite3": "^3.1.13"
+  }
+}

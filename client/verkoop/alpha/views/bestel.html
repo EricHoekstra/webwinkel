@@ -1,0 +1,104 @@
+<div class="row">
+    <div class="col-12 pt-3">
+        <div class="float-left col-2">
+            <p><a href="producten">Winkel verder</a></p>
+        </div>
+        <div class="col-6 float-left">
+            <h3>Uw bestelling</h3>
+            <div class="row">
+                <div class="col">
+                    <div>
+                        <p><i class="fas fa-shopping-cart "></i> Wij verzenden het volgende:</p>
+                        <table class="table table-bordered table-sm text-primary ">
+                            <thead>
+                                <tr>
+                                    <td>Artikel</td>
+                                    <td>Aantal</td>
+                                    <td>Per stuk</td>
+                                    <td>Prijs</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="p in model.winkelwagen.inhoud track by p.product.Product_Nummer">
+                                    <td>{{p.product.Product_Productnaam}}</td>
+                                    <td>
+                                        {{p.aantal}}
+                                    </td>
+                                    <td>
+                                        {{p.product.Product_Prijs | currency}}
+                                    </td>
+                                    <td>
+                                        {{p.aantal * p.product.Product_Prijs | currency}}
+                                    </td>
+                                </tr>
+                                <tr ng-show="!model.winkelwagen.inhoud || model.winkelwagen.inhoud.length == 0">
+                                    <td colspan="3">Uw winkelwagen is leeg.</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td>Subtotaal</td>
+                                    <td>{{model.winkelwagen.totaalAantal()}}</td>
+                                    <td></td>
+                                    <td>{{model.winkelwagen.totaalPrijs() | currency}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Verzendkosten</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>{{4.50 | currency}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Totaal</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>{{model.winkelwagen.totaalPrijs() + 4.50 | currency}}</td>
+                                </tr>
+
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div>
+                        <p><i class="fas fa-home "></i> Naar het volgende adres:</p>
+                        <p class="text-primary ">
+                            {{model.adressen.verzend.beeld.Adres_Straatnaam}} {{model.adressen.verzend.beeld.Adres_Huisnummer}} {{model.adressen.verzend.beeld.Adres_Toevoeging}} <br />
+                            {{model.adressen.verzend.beeld.Adres_Postcode}} {{model.adressen.verzend.beeld.Adres_Plaats}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-show="model.adressen.factuurAdresGebruiken">
+                <div class="col">
+                    <div>
+                        <p><i class="fas fa-location-arrow "></i> De factuur sturen wij naar:</p>
+                        <p class="text-primary ">
+                            {{model.adressen.factuur.beeld.Adres_Straatnaam}} {{model.adressen.factuur.beeld.Adres_Huisnummer}} {{model.adressen.factuur.beeld.Adres_Toevoeging}} <br />
+                            {{model.adressen.factuur.beeld.Adres_Postcode}} {{model.adressen.factuur.beeld.Adres_Plaats}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p><i class="fas fa-file-alt "></i> Met het plaatsen van bovenstaande bestelling gaat u akkoord met de <a href="">algemene voorwaarden</a> van deze webwinkel.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p>
+                        <button type="button"
+                                ng-init="geklikt = false;"
+                                ng-class="{'btn': true, 'btn-success': !geklikt, 'btn-outline-success': geklikt}"
+                                ng-click="geklikt = true;">
+                            Akkoord
+                        </button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

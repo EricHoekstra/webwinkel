@@ -1,0 +1,7 @@
+<div class="col-12 col-lg-2 p-1 cursor-pointer"
+     ng-class="(pg == model.productgroep.segment ? 'productgroup-item productgroup-item-active' : 'productgroup-item')"
+     ng-repeat="pg in model.productgroepen.segment"
+     ng-click="productgroep.kies(pg);">
+    <img class="product-image product-image-small mr-1" ng-src="{{model.foto.url(pg.Foto_Nummer)}}" />
+    <span>{{pg.Productgroep_Omschrijving}}</span>
+</div>

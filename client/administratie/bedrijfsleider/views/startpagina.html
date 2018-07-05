@@ -1,0 +1,48 @@
+<h1>Supermarkt.nl voor de bedrijfsleider</h1>
+<p>
+    <span ng-show="!isIngelogd.ingelogd">Voor de meeste functionaliteiten dient u <a href="#" ng-click="login()">ingelogd te zijn</a>.</span>
+    <span ng-show="isIngelogd.ingelogd">U bent ingelogd als {{account.Naam}}.</span>
+</p>
+<h2>Scorebord</h2>
+<p>
+    Het bord toont het <em title="Nou ja, bijna! Apache 2.2 ondersteunt het websocket-protocol niet, dus dan maar pollen door de client.">real-time</em> verkeer op de site. Een artikel wordt besteld wanneer deze in het winkelwagentje wordt opgenomen. Als de klant op akkoord klikt wordt een factuur aangemaakt, die vervolgens betaald kan worden. Bestellingen waarvan de factuur (op een dubbeltje na) geheel betaald is, kunnen in het distributieproces worden opgenomen. De cijfers volgen die waterval. Het getoonde getal is steeds het ontbrekende aantal bestelregels ten opzichte van de fase links.
+    <table class="scoreboard">
+        <tr>
+            <td class="kopje" colspan="10">Aantal artikelen</td>
+            <td ng-click="scoreboard.annuleer()" class="cursor-pointer" title="Stopt het scoreboard. Herlaad de pagina om opnieuw te starten.">
+                <div ng-class="(scoreboard.indicator ? 'indicator on' : 'indicator off')"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>Besteld</td>
+            <td class="score">{{scoreboard.score.bestelregels.gemaakt || 0}}</td>
+            <td>Gefactureerd</td>
+            <td class="score">{{scoreboard.score.bestelregels.gefactureerd - scoreboard.score.bestelregels.gemaakt || 0}}</td>
+            <td>Betaald</td>
+            <td class="score">{{scoreboard.score.bestelregels.betaald - scoreboard.score.bestelregels.gefactureerd || 0}}</td>
+            <td>Verzonden</td>
+            <td class="score">{{scoreboard.score.bestelregels.verzonden - scoreboard.score.bestelregels.betaald || 0}}</td>
+            <td>Afgeleverd</td>
+            <td class="score">{{scoreboard.score.bestelregels.afgeleverd - scoreboard.score.bestelregels.verzonden || 0}}</td>
+        </tr>
+        <tr>
+            <td class="kopje" colspan="10">Winkel</td>
+        </tr>
+        <tr>
+            <td>Bezoeken</td>
+            <td class="score">{{scoreboard.score.bezoeken.aantal}}</td>
+            <td>Willekeurig</td>
+            <td class="score">{{scoreboard.score.bestelregels.willekeurig}}</td>
+        </tr>
+    </table>
+<p>
+    Aanvullend laat het scoreboard het aantal <a href="bezoekerslog">bezoeken</a> zien, het aantal verschillende ip-adressen, en een kleine controle of het systeem live is. Het willekeurige getal wordt genegereerd door de database en gaat door de API en de client naar het scherm. Het is dus een soort end-to-end controle.
+</p>
+<h2>Winkelopening</h2>
+<p>In geval van onderhoud of om een andere reden kan de winkel gesloten worden. Bezoekers krijgen een informatiepagina te zien. </p>
+<form name="winkelopeningForm">
+    <label>
+        <input type="checkbox" ng-model="winkelstatus.geopend" ng-change="winkelstatus.$save()">
+        Geopend? <em>Let op. Hiermee wordt de winkel onmiddelijk gesloten.</em>
+    </label>
+</form>

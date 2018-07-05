@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col">
+        <h1>Rapportage</h1>
+        <p>Kies een rapportage uit de lijst.</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <p><select ng-model="rapport" ng-options="rapport.Rapport_Naam for rapport in rapporten"></select></p>
+        <p><button ng-click="kies()">Kies</button></p>
+    </div>
+    <div class="col" ng-show="laden"><p>Het rapport wordt geladen ...</p></div>
+    <div class="col" ng-show="rapport.Rapport_Tabel && !laden">
+        <p>
+            U koos voor het rapport <em>{{rapport.Rapport_Naam}}</em>.
+            {{rapport.Rapport_Omschrijving}}
+        </p>
+        <table>
+            <tr>
+                <th class="border border-bottom" ng-repeat="(key, value) in rapport.Rapport_Tabel[0]">{{key}}</th>
+            </tr>
+            <tr ng-repeat="rij in rapport.Rapport_Tabel">
+                <td ng-class="($index > 0 ? 'border border-left': null)" ng-repeat="kolom in rij">{{kolom}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

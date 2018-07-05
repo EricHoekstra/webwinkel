@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-12 pt-3">
+        <div class="float-left col-2">
+            <p><a href="producten">Winkel verder</a></p>
+        </div>
+        <div class="float-left col-5">
+            <h3>{{model.product.Product_Productnaam}}</h3>
+            <table class="table">
+                <tr>
+                    <td><img style="max-height: 150px;" ng-src="{{model.fotoUrl(model.product.Foto_Nummer)}}" /></td>
+                    <td style="vertical-align: middle;">
+                        <form name="voegtoeFormulier" class="form-group" novalidate>
+                            <div class="form-group row">
+                                <input name="productAantal"
+                                       type="number"
+                                       required
+                                       class="form-control text-center col-2"
+                                       ng-model="product.aantal"
+                                       ng-pattern="/^[0-9]{1,3}$/" min="1" }>
+                                <span class="pl-2"></span>
+                                <button type="button"
+                                        ng-init="geklikt = false;"
+                                        ng-class="{'btn': true, 'btn-success': !geklikt, 'btn-outline-success': geklikt}"
+                                        ng-click="product.voegtoe(model.product, product.aantal); geklikt = true;">
+                                    Bestel
+                                </button>
+                                <p ng-show="voegtoeFormulier.productAantal.$invalid && voegtoeFormulier.productAantal.$dirty" class="text-danger">Kiest u minimaal 1 en maximaal 999 artikelen.</p>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+                <tr><td>Prijs</td><td>{{model.product.Product_Prijs | currency}}</td></tr>
+                <tr><td>Merk</td><td>{{model.product.Merk_Naam}}</td></tr>
+                <tr><td>Website</td><td><a target="_blank" href="{{model.product.Merk_Website}}">{{model.product.Merk_Website}}</a></tr>
+                <tr><td>Product</td><td>{{model.product.Product_Productnaam}}</td></tr>
+                <tr><td>Verpakt per</td><td>{{(!model.product.Product_VerpaktPer || model.product.Product_VerpaktPer == 1 ? "stuk" : model.product.Product_VerpaktPer)}}</td></tr>
+                <tr><td>Productnummer</td><td>{{model.product.Product_Nummer}}</td></tr>
+                <tr><td>GTIN</td><td>{{model.product.Product_GTIN}}</td></tr>
+                <tr><td>Productgroep</td><td>{{model.product.Productgroep_Omschrijving}}</td></tr>
+            </table>
+        </div>
+    </div>
+</div>

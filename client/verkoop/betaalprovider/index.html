@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="betaalproviderApp">
+<head>
+    <base href="https://www.erichoekstra.com/webwinkel/betaalprovider/index.html" />
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Dummy betaalprovider</title>
+
+    <!-- AngularJS -->
+    <script src="/webwinkel/gedeeld/script/angularjs/1.6.9/angular.min.js"></script>
+    <script src="/webwinkel/gedeeld/script/angularjs/1.6.9/angular-resource.js"></script>
+    <script src="/webwinkel/gedeeld/script/angularjs/angular-locale_nl-nl.js"></script>
+
+    <!-- Logica van deze applicatie. -->
+    <script src="/webwinkel/gedeeld/script/modules/modules.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/configuratie.js"></script>
+    <script>
+        /*
+         * Provisorische betaalprovider. Alleen bedoeld als tijdelijke schakel in het bestelproces. Deze betaalprovider wordt vervangen door een commerciële aanbieder van zo'n service.
+         */
+        angular.module("betaalproviderApp", ["winkelServices"])
+
+            .config(function ($locationProvider) {
+                $locationProvider.html5Mode(true);
+            })
+
+            .controller("standaardController", function ($scope, $location, $window, $http, $log, configuratie) {
+
+                // Model
+                $scope.model = {};
+                var bedrag = $location.search().bedrag;
+                if (bedrag)
+                    $scope.model.bedrag = bedrag.replace(/[^0-9\.]/, "");
+                var bestellingNummer = $location.search().bestellingNummer;
+                if (bestellingNummer)
+                    $scope.model.bestellingNummer = bestellingNummer.replace(/[^0-9]/, "");
+                $log.info(`Het betalingsproces is gestart voor bestelling ${bestellingNummer} en bedrag ${bedrag}.`);
+
+                // Klant heeft betaald
+                $scope.betaal = function () {
+                    $log.warn(`De klant koos voor het betalen van ${$scope.model.bedrag} euro.`);
+                    $http.post(configuratie.betaling.betaal, {
+                        Bestelling_Nummer: bestellingNummer,
+                        referentie: Math.floor(Math.random() * 1000000),
+                        bedrag: $scope.model.bedrag
+                        // Het bestellingnummer blijkt uit de sessie.
+                    }).then(
+                        // Klant heeft betaald en de API van de webwinkel gaf oké.
+                        function (response) {
+                            $log.info("De betaling is verwerkt door de webwinkel.");
+                            $window.location.href = configuratie.betaling.gelukt;
+                        },
+                        // De API van de webwinkel gaf een fout, betaling niet verwerkt.
+                        function (response) {
+                            $log.warn("De webwinkel weigerde de betaling te verwerken.", response);
+                            $window.location.href = configuratie.betaling.mislukt;
+                        }
+                    )
+                };
+
+                // Klant koos voor annuleren
+                $scope.annuleer = function () {
+                    $log.warn("De klant koos voor het annuleren van de betaling.");
+                    $http.post(configuratie.betaling.annuleer)
+                        // De klant annuleerde en de webwinkel verwerkte de annulering.
+                        .then(function (response) {
+                            $log.info("De annulering is verwerkt door de webwinkel.");
+                            $window.location.href = configuratie.betaling.mislukt;
+                        })
+                        // De klant annuleerde en de API van de webwinkel gaf een fout op de verwerking van die annulering.
+                        .catch(function (response) {
+                            $log.warn("De webwinkel weigerde de annulering te verwerken.", response);
+                            $window.location.href = configuratie.betaling.mislukt;
+                        });
+                };
+            })
+    </script>
+
+</head>
+<body ng-controller="standaardController">
+    <h1>Dummy betaalprovider</h1>
+    <p><em>U voert geen echte betaling uit.</em></p>
+    <div>
+        <form name="bedragForm">
+            <p>Betaal <input style="width: 5em;" ng-model="model.bedrag" ng-pattern="/^[0-9]+[\.]?[0-9]*$/" /> voor bestelling #{{model.bestellingNummer}}.</p>
+            <p><button ng-disabled="!bedragForm.$valid" ng-click="betaal()">Betaal {{model.bedrag | currency }}</button></p>
+        </form>
+    </div>
+    <p ng-show="!(model.bedrag && model.bestellingNummer)" style="color: red;">Het bedrag of het nummer van de bestelling ontbreekt. Een betaling kan niet worden uitgevoerd. Decimalen worden gespecificeerd met een punt.</p>
+    <p><button ng-click="annuleer()">Annuleer</button></p>
+</body>
+</html>

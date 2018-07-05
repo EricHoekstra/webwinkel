@@ -1,0 +1,98 @@
+<div class="fixed-top bg-primary">
+    <div class="d-flex justify-content-around my-2 text-light">
+        <div class="d-none d-lg-block"><i class="fas fa-check"></i> Meer dan 450.000 producten</div>
+        <div class="d-none d-lg-block"><i class="fas fa-check"></i> Scherp geprijst</div>
+        <div class="d-none d-lg-block position-relative">
+            <div class="position-absolute w-100 shipping-fast">
+                <i class="fas fa-shipping-fast shipping-fast shipping-disappear"></i>
+            </div>
+            <div><i class="fas fa-check"></i> Snelle levering</div>
+        </div>
+        <div class="d-none d-lg-block"><i class="fas fa-check"></i> Geen verzendkosten boven 15 euro*</div>
+        <div class="d-none d-lg-block"><i class="fas fa-check"></i> Klanten geven Supermarkt.nl een 9.6!</div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand text-light" href="start">
+            <div class="logo" style="line-height: 1rem;">
+                <span style="font-style: italic; font-size: 1.6em; font-weight: bold;"><span class="text-info">Super</span><span class="text-dark">markt</span></span>.nl<br />
+                <span class="text-secondary" style="font-size: 0.8em;">Goedkoper kan niet</span>
+            </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse pl-2" id="navbar1">
+            <ul class="navbar-nav lead order-1">
+                <li class="nav-item">
+                    <a class="nav-link" href="productgroepen">Artikelen</a>
+                </li>
+                <li class="nav-item lead">
+                    <a class="nav-link" href="merken">Merken</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav lead order-3">
+                <!-- Klantregistratie, account -->
+                <li class="nav-item">
+                    <a class="nav-link"
+                       ng-class="(model.login.ingelogd ? 'text-secondary' : null)"
+                       href="registratie">
+                        <i class="fas fa-user"></i>
+                    </a>
+                </li>
+                <!-- Adressen -->
+                <li class="nav-item">
+                    <a class="nav-link"
+                       ng-class="(model.klant.EmailAdres || model.adressen.verzend.beeld.Adres_Nummer ? 'text-secondary' : null)"
+                       href="adressen">
+                        <i class="fas fa-address-book"></i>
+                    </a>
+                </li>
+                <!-- Winkelwagentje -->
+                <li class="nav-item">
+                    <span winkelwagen=""></span>
+                </li>
+                <!-- Bestellingen -->
+                <li class="nav-item">
+                    <a class="nav-link" href="bestelhistorie">
+                        <i class="fas fa-boxes"></i>
+                    </a>
+                </li>
+            </ul>
+            <!-- Zoekvak met een afwijkende controller: de productController. -->
+            <form class="form-inline mx-lg-auto px-0 col-xs-12 col-lg-8 position-relative order-2"
+                  ng-controller="productController" ng-cloak>
+                <input class="form-control col-12"
+                       type="search" placeholder="Wat zoekt u? Bijvoorbeeld: 'quick organic oats'"
+                       ng-model="query.zoek.vraag"
+                       ng-model-options="{ debounce: 1000 }"
+                       ng-change="query.zoek.beantwoord()"
+                       ng-focus="query.zoek.actief = true" />
+                <button class="form-control form-control-reset" type="reset" ng-click="query.zoek.actief = false;">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="form-control position-absolute bg-light"
+                     style="top: 100%; left: 0; right: 0; max-height: 50vh; overflow: auto;"
+                     ng-show="query.zoek.vraag.length && query.zoek.actief">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item cursor-pointer"
+                            ng-repeat="p in query.zoek.producten | limitTo: filter.pagina.grootte * 2"
+                            ng-click="query.zoek.actief = false; product.kies(p)">
+                            <img class="product-image product-image-small" ng-src="{{model.foto.url(p.Foto_Nummer)}}" />
+                            {{p.Merk_Naam}} {{p.Product_Productnaam}}
+                        </li>
+                        <li class="list-group-item"
+                            ng-show="query.zoek.producten.length > filter.pagina.grootte * 2">
+                            <a href="#">Wij hebben nog meer artikelen &hellip;</a>
+                        </li>
+                        <li class="list-group-item"
+                            ng-show="query.zoek.producten.length == 0 && query.zoek.vraag">
+                            Niets gevonden &hellip;
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </nav>
+</div>
+<!-- Ruimte nodig voor balk. Todo: relatieve hoogte bepalen. -->
+<div class="invisible" style="height: 150px;"></div>

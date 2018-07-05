@@ -1,0 +1,93 @@
+<h1>Verzenden</h1>
+<p>Regel de verzending van de aankopen. Deze webwinkel bezit een vrachtauto die een rondje rijdt met als begin- en eindpunt het distributiecentrum in Utrecht. Google berekent de optimale route die de vrachtauto rijdt. De markeringen op de kaart geven de locatie van de artikelen aan. Klik op een markering voor meer info. Een verzending is een bestelling (of een aantal bestellingen) die op het verzendadres worden afgeleverd. </p>
+<ol>
+    <li>
+        <p>Begin met het samenstellen van de verzendingen. Alleen de eerst vijftien niet-verzonden bestellingen worden getoond.</p>
+        <table>
+            <thead>
+                <tr class="border border-bottom">
+                    <th><input type="checkbox" ng-click="bestellingselectie.inverteer()" ng-model="bestellingselectie.alle" /></th>
+                    <th class="border border-left">Bestelling</th>
+                    <th class="border border-left">Tijdstip</th>
+                    <th class="border border-left">Klant</th>
+                    <th class="border border-left">Bedrag</th>
+                    <th class="border border-left">Verzendadres</th>
+                    <th class="border border-left">Niet verzonden bestelregels</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="bestelregel in bestelregels | filter : verzendselectie.nietingepakt | orderBy : '+Bestelling_Nummer' | limitTo : 15">
+                    <td><input type="checkbox" ng-model="bestelregel.verzend" /></td>
+                    <td class="border border-left">{{bestelregel.Bestelling_Nummer}}</td>
+                    <td class="border border-left">{{bestelregel.Bestelling_Tijdstip | toLocalDateString: account.Taal }}</td>
+                    <td class="border border-left">{{bestelregel.Klant_Nummer}}</td>
+                    <td class="border border-left">{{bestelregel.Factuur_Bedrag | currency}}</td>
+                    <td class="border border-left">{{bestelregel.Adres_Straatnaam}} {{bestelregel.Adres_Huisnummer}} {{bestelregel.Adres_Toevoeging}} in {{bestelregel.Adres_Plaats}}</td>
+                    <td class="border border-left">{{bestelregel.Bestelregel_Minus_Verzendregel}}</td>
+                </tr>
+                <tr ng-show="!bestelregels || bestelregels.length == 0">
+                    <td colspan="6">Niets te doen: alle bestelregels zijn opgenomen in een verzending.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><button ng-click="verzendselectie.verzend()" ng-disabled="voertuig.rijdt">Verzend</button> <span ng-show="inpakken" class="pl-3 opvallend">De bestelling(en) worden ingepakt ...</span></p>
+    </li>
+    <li>
+        <p>De volgende verzendingen staan in het distributiecentrum gereed voor bezorging. Alleen de eerst 15 niet gedistribueerde verzendingen worden getoond.</p>
+        <table>
+            <thead>
+                <tr class="border border-bottom">
+                    <th>Verzending</th>
+                    <th class="border border-left">Klant</th>
+                    <th class="border border-left">Adres</th>
+                    <th class="border border-left">Bestellingen</th>
+                    <th class="border border-left">Distributiestatus</th>
+                    <th class="border border-left"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="verzendregel in verzendregels | orderBy : '+Verzending_Nummer' | limitTo : 15">
+                    <td>{{verzendregel.Verzending_Nummer}}</td>
+                    <td class="border border-left">{{verzendregel.Klant_Nummer}}</td>
+                    <td class="border border-left">{{verzendregel.Adres_Straatnaam}} {{verzendregel.Adres_Huisnummer}} {{verzendregel.Adres_Toevoeging}} in {{verzendregel.Adres_Plaats}}</td>
+                    <td class="border border-left"><span ng-repeat="bestelregel in verzendregel.bestelregels">{{bestelregel.Bestelling_Nummer}}{{($last ? "": ", ")}}</span></td>
+                    <td class="border border-left">{{(verzendregel.distributie ? "In distributie" : "Wacht op distributie")}}</td>
+                    <td class="border border-left"><button ng-click="verzendselectie.wis(verzendregel)" ng-disabled="voertuig.rijdt">Wis</button></td>
+                </tr>
+                <tr ng-show="(!verzendregels || !verzendregels.length) && !inpakken">
+                    <td colspan="4">Stel eerst een verzending samen.</td>
+                </tr>
+            </tbody>
+        </table>
+    </li>
+    <li>
+        <p><a id="distributie"></a>Laat de verzendingen die gereed staan in het distributiecentrum afleveren bij de klanten. Een minuut in de animatie duurt in werkelijkheid <input type="text" style="width: 3em; text-align: center;" ng-init="tijdsschaal = 240;" ng-model="tijdsschaal" /> minuten.</p>
+        <p>
+            <button ng-click="distribueer()" ng-disabled="verzendregels.length == 0 || animatie.voertuig.rijdt">Distribueer</button>
+            <button ng-click="animatie.voertuig.stop();" ng-disabled="!animatie.voertuig.rijdt">Stop</button>
+            <span class="pl-3 opvallend">{{animatie.route.status || animatie.status}}</span>
+        </p>
+        <!-- Directive wegenkaart -->
+        <div id="wegenkaart1" class="wegenkaart" wegenkaart="" kaart="kaart"></div>
+        <!-- Actuele status van onderliggende objecten, zie controller. -->
+        <p class="wegenkaart onderschrift">{{animatie.voertuig.toString()}} {{animatie.distributiecentrum.toString()}} {{animatie.route.toString()}}</p>
+    </li>
+    <li>
+        <p>De volgende verzendingen hebben klanten reeds gelukkig gemaakt. Alleen de laatste 15 worden getoond.</p>
+        <table>
+            <thead>
+                <tr class="border border-bottom">
+                    <th class="border">Verzending</th>
+                    <th class="border border-left">Adres</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="verzendregel in afgeleverd | orderBy : '-Verzending_Nummer' | limitTo: 15">
+                    <td class="border">{{verzendregel.Verzending_Nummer}}</td>
+                    <td class="border border-left">{{verzendregel.Adres_Straatnaam}} {{verzendregel.Adres_Huisnummer}} {{verzendregel.Adres_Toevoeging}} in {{verzendregel.Adres_Plaats}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </li>
+</ol>
+

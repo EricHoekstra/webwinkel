@@ -1,0 +1,94 @@
+<div class="row">
+    <div class="col-12 pt-3">
+        <div class="float-left col-2">
+            <p><a href="producten">Winkel verder</a></p>
+        </div>
+        <div class="float-left col-10">
+            <h3>Productgroepen</h3>
+            <div id="carousel1" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <!-- Segment -->
+                    <div class="carousel-item active">
+                        <div class="custom-carousel-page-B">
+                            <h4>Segment</h4>
+                            <p>Kies een productsegment.</p>
+                            <div class="d-flex flex-row flex-wrap">
+                                <div class="cursor-pointer custom-flex-center border border-light rounded mr-1 mt-1"
+                                     style="height: 4em; width: 12em; overflow: hidden;"
+                                     ng-repeat="pg in model.productgroepen.segment"
+                                     ng-click="productgroep.kies(pg);"
+                                     ng-class="(pg == productgroep.segment ? 'bg-primary text-light' : 'bg-light text-dark')"
+                                     data-target="#carousel1" data-slide-to="1">
+                                    <p>{{pg.Productgroep_Omschrijving}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Familie -->
+                    <div class="carousel-item">
+                        <div class="custom-carousel-page-B">
+                            <h4><span data-target="#carousel1" data-slide-to="0" class="cursor-pointer">{{productgroep.segment.Productgroep_Omschrijving}}</span></h4>
+                            <p class="cursor-pointer" data-target="#carousel1" data-slide="prev"><i class="fas fa-chevron-left"></i> Ga terug</p>
+                            <div class="d-flex flex-row flex-wrap">
+                                <div class="cursor-pointer custom-flex-center border border-light rounded mr-1 mt-1"
+                                     style="height: 4em; width: 12em; overflow: hidden"
+                                     ng-repeat="pg in model.productgroepen.familie"
+                                     ng-click="productgroep.kies(pg);"
+                                     ng-class="(pg == productgroep.familie ? 'bg-primary text-light' : 'bg-light text-dark')"
+                                     data-target="#carousel1" data-slide-to="2">
+                                    <p>{{pg.Productgroep_Omschrijving}}</p>
+                                </div>
+                            </div>
+                            <div ng-include="'views/productgroepen_producten.html'"></div>
+                        </div>
+                    </div>
+                    <!-- Klasse -->
+                    <div class="carousel-item">
+                        <div class="custom-carousel-page-B">
+                            <h4>
+                                <span data-target="#carousel1" data-slide-to="0" class="cursor-pointer">{{productgroep.segment.Productgroep_Omschrijving}}</span>
+                                <i class="fas fa-chevron-right"></i>
+                                <span data-target="#carousel1" data-slide-to="1" class="cursor-pointer">{{productgroep.familie.Productgroep_Omschrijving}}</span>
+                            </h4>
+                            <p class="cursor-pointer" data-target="#carousel1" data-slide="prev"><i class="fas fa-chevron-left"></i> Ga terug</p>
+                            <div class="d-flex flex-row flex-wrap">
+                                <div class="cursor-pointer custom-flex-center border border-light rounded mr-1 mt-1"
+                                     style="height: 4em; width: 12em; overflow: hidden"
+                                     ng-repeat="pg in model.productgroepen.klasse"
+                                     ng-click="productgroep.kies(pg);"
+                                     ng-class="(pg == productgroep.klasse ? 'bg-primary text-light' : 'bg-light text-dark')"
+                                     data-target="#carousel1" data-slide-to="3">
+                                    <p>{{pg.Productgroep_Omschrijving}}</p>
+                                </div>
+                            </div>
+                            <div ng-include="'views/productgroepen_producten.html'"></div>
+                        </div>
+                    </div>
+                    <!-- Bouwsteen -->
+                    <div class="carousel-item">
+                        <div class="custom-carousel-page-B">
+                            <h4>
+                                <span data-target="#carousel1" data-slide-to="0" class="cursor-pointer">{{productgroep.segment.Productgroep_Omschrijving}}</span>
+                                <i class="fas fa-chevron-right"></i>
+                                <span data-target="#carousel1" data-slide-to="1" class="cursor-pointer">{{productgroep.familie.Productgroep_Omschrijving}}</span>
+                                <i class="fas fa-chevron-right"></i>
+                                <span data-target="#carousel1" data-slide-to="2" class="cursor-pointer">{{productgroep.klasse.Productgroep_Omschrijving}}</span>
+                            </h4>
+                            <p class="cursor-pointer" data-target="#carousel1" data-slide="prev"><i class="fas fa-chevron-left"></i> Ga terug</p>
+                            <div class="d-flex flex-row flex-wrap">
+                                <div class="cursor-pointer custom-flex-center border border-light rounded mr-1 mt-1"
+                                     style="height: 4em; width: 12em; overflow: hidden"
+                                     ng-repeat="pg in model.productgroepen.bouwsteen"
+                                     ng-click="productgroep.kies(pg);"
+                                     ng-class="(pg == productgroep.bouwsteen ? 'bg-primary text-light' : 'bg-light text-dark')">
+                                    <p>{{pg.Productgroep_Omschrijving}}</p>
+                                </div>
+                            </div>
+                            <div ng-include="'views/productgroepen_producten.html'"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

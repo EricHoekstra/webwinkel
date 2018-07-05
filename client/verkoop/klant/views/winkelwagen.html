@@ -1,0 +1,53 @@
+<div class="col">
+    <h3>Winkelwagen</h3>
+    <div class="row">
+        <div class="col">
+            <!-- Slechts twee icoontjes worden gerenderd, vervolgens neemt SVG-sprites het over. Zie https://fontawesome.com/how-to-use/performance-and-security#symbols-using-svg-sprites. Onderstaande markup is niet zichtbaar in het scherm. -->
+            <i class="fas fa-check" data-fa-symbol="check"></i>
+            <i class="far fa-trash-alt" data-fa-symbol="trash"></i>
+            <div ng-repeat="bestelregel in model.bestelregels track by bestelregel.Product_Nummer">
+                <div class="d-flex justify-content-between border-bottom border-secondary">
+                    <div class="d-flex flex-wrap align-items-center">
+                        <img class="m-1 product-image product-image-small" decoding="async" ng-src="{{model.foto.url(bestelregel.Foto_Nummer)}}" />
+                        <p class="m-1 cursor-pointer" ng-click="product.kies(bestelregel)">
+                            {{bestelregel.Merk_Naam}} {{bestelregel.Product_Productnaam}},
+                        </p>
+                        <form class="d-flex align-items-center" name="voegtoeFormulier" novalidate>
+                            <input name="productAantal"
+                                   type="number"
+                                   required
+                                   class="form-control form-control-sm m-1"
+                                   style="width: 4em;"
+                                   ng-model="bestelregel.Bestelregel_Aantal"
+                                   ng-change="bestelling.wijzig(bestelregel); bestelregel.gewijzigd = model.nu();"
+                                   ng-pattern="/^[0-9]{1,3}$/" min="1" } />
+                            <span class="m-1 text-success" ng-show="model.nu() - (bestelregel.gewijzigd || 0) < 2000"><svg class="svg-inline--fa fa-w-20"><use xlink:href="#check"></use></svg></span>
+                            <p ng-show="voegtoeFormulier.productAantal.$invalid && voegtoeFormulier.productAantal.$dirty"
+                               class="m-1 text-danger">Kiest u minimaal 1 artikel.</p>
+                        </form>
+                        <p class="m-1">&times;</p>
+                        <p class="m-1">{{bestelregel.Product_Prijs | currency}}</p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <p class="m-1 text-right">{{bestelregel.Bestelregel_Prijs | currency}}</p>
+                        <p class="m-1 cursor-pointer" ng-click="bestelling.verwijder(bestelregel)"><svg class="svg-inline--fa fa-w-20"><use xlink:href="#trash"></use></svg></p>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="!model.bestelregels.length">Uw winkelwagen is leeg. <a href="keuzehulp">Wilt u soms hulp?</a></div>
+            <div ng-show="model.bestelregels.length > 0" class="d-flex align-items-center justify-content-between border-bottom border-secondary">
+                <p class="m-1" ng-show="model.bestelling.Bestelling_Aantal == 1">E&eacute;n artikel in uw winkelwagen. </p>
+                <p class="m-1" ng-show="model.bestelling.Bestelling_Aantal > 1">Totaal {{model.bestelling.Bestelling_Aantal}} artikelen in uw winkelwagen. </p>
+                <div class="d-flex align-items-center">
+                    <p class="m-1 font-weight-bold">{{model.bestelling.Bestelling_Prijs | currency}}</p>
+                    <p class="m-1 cursor-pointer" ng-click="bestelling.verwijder()"><svg class="svg-inline--fa fa-w-20"><use xlink:href="#trash"></use></svg></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-5 d-flex justify-content-end">
+        <a href="adressen/true" class="btn btn-success" ng-show="model.bestelregels.length > 0">
+            Verder
+        </a>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="col col-lg-12">
+    <div id="aanbiedingenCarousel" class="carousel slide m-2" 
+         data-ride="carousel" data-pause="hover" data-interval="10000">
+        <div class="carousel-inner">
+            <div class="carousel-item" ng-repeat="aanbieding in model.aanbiedingen" ng-class="($index == 0 ? 'active' : null)">
+                <div class="row">
+                    <div class="col-9 col-lg-10">
+                        <h3>{{aanbieding.titel}}</h3>
+                        <p style="min-height: 3em;">
+                            <!-- Min-height nodig voor het opvangen voor het opvangen van een variabele tekstlengte die ongewenst doorwerkt in de hoogte van de banner. -->
+                            <span ng-bind-html="aanbieding.tekst"></span>
+                        </p>
+                        <button type="button" class="btn btn-primary mb-3"
+                                ng-click="product.kies(aanbieding.product)">
+                            Bestel nu!
+                        </button>
+                    </div>
+                    <div class="col-3 col-lg-2">
+                        <img class="img-fluid border border-dark" ng-src="{{model.foto.url(aanbieding.product.Foto_Nummer)}}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

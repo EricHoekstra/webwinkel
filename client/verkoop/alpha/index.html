@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="ontwikkelaarApp">
+<head>
+    <base href="https://www.erichoekstra.com/webwinkel/ontwikkelaar/index.html" />
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Webwinkel | Ontwikkelaar</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/webwinkel/gedeeld/css/bootstrap/4.0.0/bootstrap.min.css">
+    <script src="/webwinkel/gedeeld/script/jquery/3.2.1/jquery-3.2.1.slim.min.js"></script>
+    <script src="/webwinkel/gedeeld/script/popper/1.12.9/umd/popper.min.js"></script>
+    <script src="/webwinkel/gedeeld/script/bootstrap/4.0.0/bootstrap.min.js"></script>
+
+    <!-- Fontawesome -->
+    <script src="/webwinkel/gedeeld/script/fontawesome/5.0.4/fontawesome-all.js" defer></script>
+
+    <!-- AngularJS -->
+    <script src="/webwinkel/gedeeld/script/angularjs/1.6.6/angular.min.js"></script>
+    <script src="/webwinkel/gedeeld/script/angularjs/1.6.6/angular-route.js"></script>
+    <script src="/webwinkel/gedeeld/script/angularjs/1.6.6/angular-resource.js"></script>
+    <script src="/webwinkel/gedeeld/script/angularjs/angular-locale_nl-nl.js"></script>
+
+    <!-- Logica van deze applicatie. -->
+    <script src="/webwinkel/gedeeld/script/modules/modules.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/configuratie.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/account.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/adres.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/klant.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/product.js"></script>
+    <script src="/webwinkel/gedeeld/script/services/winkelwagen.js"></script>
+    <script src="modules/modules.js"></script>
+    <script src="routes/routes.js"></script>
+    <script src="controllers/standaard.js"></script>
+    <script src="controllers/product.js"></script>
+    <script src="controllers/account.js"></script>
+    <script src="controllers/adres.js"></script>
+
+    <!-- Enkele aanpassingen op Bootstrap. -->
+    <link rel="stylesheet" href="css/webwinkel.css" />
+</head>
+<body>
+    <div class="container-fluid" ng-controller="standaardController">
+        <div class="row pt-3">
+            <div class="col-12">
+                <h1>Ontwikkelaar's client</h1>
+                <table class="table">
+                    <tbody>
+                        <tr class="table-secondary">
+                            <td><a href="startpagina">Startpagina</a></td>
+                            <td><a href="producten">Producten</a></td>
+                            <td></td>
+                            <td><a href="account">Uw klantgegevens</a></td>
+                            <td><a href="login">Login</a></td>
+                            <td><a href="over">Over</a></td>
+                            <td><i class="fas fa-user"></i> {{ (model.login.ingelogd ? "U bent ingelogd" : "U bent niet ingelogd") }}</td>
+                        </tr>
+                        <tr class="table-secondary">
+                            <td><a href=""></a></td>
+                            <td><a href="merken">Merken</a></td>
+                            <td></td>
+                            <td><a href="adressen">Adressen</a></td>
+                            <td><a href="logout">Logout</a></td>
+                            <td></td>
+                            <td><i class="fas fa-shopping-cart"></i> Uw winkelwagen bevat {{(model.winkelwagen.inhoud.length > 0 ? model.winkelwagen.inhoud.length + " verschillende": "geen")}} artikelen.</td>
+                        </tr>
+                        <tr class="table-secondary">
+                            <td></td>
+                            <td><a href="productgroepen">Productgroepen</a></td>
+                            <td><a href="winkelwagen">Winkelwagentje</a></td>
+                            <td><a href="bestel">Bestel</a></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div ng-view></div>
+    </div>
+</body>
+</html>
