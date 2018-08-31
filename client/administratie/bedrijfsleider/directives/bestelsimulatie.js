@@ -1,9 +1,3 @@
-/*
-    Simulatie
-    ---------
-    
-*/
-
 "use strict";
 
 angular.module("bedrijfsleiderApp")
@@ -12,7 +6,6 @@ angular.module("bedrijfsleiderApp")
         return {
             /**
              * De linkfunctie is verantwoordelijk voor het tekenen van de bestellingen die voorkomen in scope.simulatie.bestellingen. De functie luistert naar het event 'bestelling' en reageert vervolgens met het sturen van de teken()-boodschap naar het opgegeven BestellingVisueel-object.
-             * 
              * @param scope Geïsoleerde scope, alleen de eigenschap simulatie wordt overgenomen.
              * @param element Het canvas-element waaraan deze directive als attribuut is gekoppeld.
              */

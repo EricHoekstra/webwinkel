@@ -1,10 +1,3 @@
-/*
-
-    Controller
-    ----------
-
-*/
-
 "use strict";
 
 // Ingebouwde Node.js modules.

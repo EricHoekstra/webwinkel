@@ -32,15 +32,15 @@
                     </div>
                 </div>
             </form>
-        </div>
-        <div class="col-12 col-lg-4">
-            <h3>Verzendadres</h3>
-            <!-- Het HTMLMenuElement bestaat vooralsnog alleen in Edge en Firefox, zie https://developer.mozilla.org/en-US/docs/Web/HTML/Element/menu. -->
+            <!-- Het HTMLMenuElement bestaat vooralsnog alleen in Edge en Firefox, zie https://developer.mozilla.org/en-US/docs/Web/HTML/Element/menu. Het element staat op deze plaats, omdat het soms een witregel oplevert, en dat in dit vak geen kwaad kan. -->
             <menu type="context" id="kiesWillekeurigVerzendadres">
                 <menuitem label="Kies voor mij een adres"
                           icon="/webwinkel/gedeeld/afbeelding/adresboek.png"
                           ng-click="geefWillekeurigVerzendadres()"></menuitem>
             </menu>
+        </div>
+        <div class="col-12 col-lg-4">
+            <h3>Verzendadres</h3>
             <div class="form-row" contextmenu="kiesWillekeurigVerzendadres">
                 <div class="form-group col-lg-6">
                     <label for="postcode1">Postcode</label>
@@ -93,51 +93,51 @@
         <div class="col-12 col-lg-4" ng-show="model.klant.FactuurAdresGebruiken">
             <h3>Factuuradres</h3>
             <div class="form-row">
-                    <div class="form-group col-lg-6">
-                        <label for="postcode2">Postcode</label>
-                        <input type="text" class="form-control uppercase" id="postcode2" placeholder="1011GL"
-                               ng-model="model.adressen.factuur.origineel.Adres_Postcode"
-                               ng-change="bepaalFactuuradres()"
-                               ng-model-options="{ debounce: 500 }">
-                    </div>
-                    <div class="form-group col-lg-3">
-                        <label for="huisnummer2">Nummer</label>
-                        <input type="text" class="form-control" id="huisnummer2" placeholder="127"
-                               ng-model="model.adressen.factuur.origineel.Adres_Huisnummer"
-                               ng-change="bepaalFactuuradres()"
-                               ng-model-options="{ debounce: 500 }">
-                    </div>
-                    <div class="form-group col-lg-3">
-                        <label for="toevoeging2">Toevoeging</label>
-                        <input type="text" class="form-control uppercase" id="toevoeging2" placeholder=""
-                               ng-model="model.adressen.factuur.origineel.Adres_Toevoeging"
-                               ng-change="bepaalFactuuradres()"
-                               ng-model-options="{ debounce: 500 }">
-                    </div>
+                <div class="form-group col-lg-6">
+                    <label for="postcode2">Postcode</label>
+                    <input type="text" class="form-control uppercase" id="postcode2" placeholder="1011GL"
+                           ng-model="model.adressen.factuur.origineel.Adres_Postcode"
+                           ng-change="bepaalFactuuradres()"
+                           ng-model-options="{ debounce: 500 }">
                 </div>
-                <div ng-show="model.adressen.factuur.beeld">
-                    <div class="form-group">
-                        <label for="straat2">Straat</label>
-                        <input type="text" class="form-control" id="straat2" tabindex="-1" placeholder="&hellip;" readonly ng-model="model.adressen.factuur.beeld.Adres_Straatnaam">
-                    </div>
-                    <div class="form-group">
-                        <label for="plaats2">Plaats</label>
-                        <input type="text" class="form-control" id="plaats2" tabindex="-1" placeholder="&hellip;" readonly ng-model="model.adressen.factuur.beeld.Adres_Plaats">
-                    </div>
+                <div class="form-group col-lg-3">
+                    <label for="huisnummer2">Nummer</label>
+                    <input type="text" class="form-control" id="huisnummer2" placeholder="127"
+                           ng-model="model.adressen.factuur.origineel.Adres_Huisnummer"
+                           ng-change="bepaalFactuuradres()"
+                           ng-model-options="{ debounce: 500 }">
                 </div>
-                <div ng-show="!model.adressen.factuur.beeld">
-                    <div ng-show="model.adressen.factuur.status.gevonden === null && model.adressen.factuur.status.fout === null">
-                        <p class="text-primary fade-in"><i class="fas fa-circle-notch fa-spin"></i> Adres wordt bepaald ... </p>
-                    </div>
-                    <div ng-show="model.adressen.factuur.status.gevonden === false">
-                        <p class="text-primary">Nog geen adres gevonden.</p>
-                    </div>
-                    <div ng-show="model.adressen.factuur.status.fout === true">
-                        <p class="text-primary">Oops, fout bij het opvragen van de adresgegevens.</p>
-                    </div>
+                <div class="form-group col-lg-3">
+                    <label for="toevoeging2">Toevoeging</label>
+                    <input type="text" class="form-control uppercase" id="toevoeging2" placeholder=""
+                           ng-model="model.adressen.factuur.origineel.Adres_Toevoeging"
+                           ng-change="bepaalFactuuradres()"
+                           ng-model-options="{ debounce: 500 }">
+                </div>
+            </div>
+            <div ng-show="model.adressen.factuur.beeld">
+                <div class="form-group">
+                    <label for="straat2">Straat</label>
+                    <input type="text" class="form-control" id="straat2" tabindex="-1" placeholder="&hellip;" readonly ng-model="model.adressen.factuur.beeld.Adres_Straatnaam">
+                </div>
+                <div class="form-group">
+                    <label for="plaats2">Plaats</label>
+                    <input type="text" class="form-control" id="plaats2" tabindex="-1" placeholder="&hellip;" readonly ng-model="model.adressen.factuur.beeld.Adres_Plaats">
+                </div>
+            </div>
+            <div ng-show="!model.adressen.factuur.beeld">
+                <div ng-show="model.adressen.factuur.status.gevonden === null && model.adressen.factuur.status.fout === null">
+                    <p class="text-primary fade-in"><i class="fas fa-circle-notch fa-spin"></i> Adres wordt bepaald ... </p>
+                </div>
+                <div ng-show="model.adressen.factuur.status.gevonden === false">
+                    <p class="text-primary">Nog geen adres gevonden.</p>
+                </div>
+                <div ng-show="model.adressen.factuur.status.fout === true">
+                    <p class="text-primary">Oops, fout bij het opvragen van de adresgegevens.</p>
                 </div>
             </div>
         </div>
+    </div>
     <div class="row" ng-show="bestelproces">
         <div class="col d-flex justify-content-between">
             <a href="winkelwagen" class="btn btn-success">

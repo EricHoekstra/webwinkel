@@ -13,7 +13,6 @@ angular.module("klantApp")
 
     /**
      * Representeert (of is) het model waarmee de views en controllers hun werk doen. De $provider.service-methode van AngularJS instantieert het object 'model'. Eenmaal geïnjecteerd is een object 'model' beschikbaar met onderstaande eigenschappen en methoden. 
-     * 
      * @class
      * @method initialiseer Zet het model op de beginwaarden.
      * @method nu Ingekapselde versie van Date.now(), voor gebruik in de views.
